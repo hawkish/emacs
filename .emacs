@@ -196,13 +196,13 @@
 ;; On Mac
 (if (eq system-type 'darwin)
     (progn
-      (setq haskell-program-name "/usr/local/bin/ghci")
+      (setq haskell-program-name "ghci")
       (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent))
   )
 ;; On Windows
 (if (eq system-type 'windows-nt)
     (progn
-      (setq haskell-program-name "c:\\Local\\3420\\haskell\\2013.2.0.0\\bin\\ghci.exe")
+      (setq haskell-program-name "ghci")
       (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent))
   )
 
