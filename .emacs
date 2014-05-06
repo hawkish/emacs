@@ -170,6 +170,18 @@
 
 (setq make-backup-files nil)
 
+;; Erlang section
+(if (eq system-type 'gnu/linux)
+    (progn
+      (setq load-path (cons  "/home/morten/erlang/lib/erlang/lib/tools-2.6.14/emacs"
+      load-path))
+      (setq erlang-root-dir "/home/morten/erlang")
+      (setq exec-path (cons "/home/morten/erlang/bin" exec-path))
+      (require 'erlang-start)
+      )
+)
+
+
 ;; Go section
 (require 'go-mode-load)
 (unless (eq system-type 'windows-nt)
@@ -190,7 +202,7 @@
 ;; On Linux
 (if (eq system-type 'gnu/linux)
     (progn
-      (setq haskell-program-name "/usr/bin/ghci")
+      (setq haskell-program-name "ghci")
       (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent))
   )
 ;; On Mac
