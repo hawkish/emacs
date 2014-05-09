@@ -97,26 +97,6 @@
 	   '(lambda ()
 	      (setq erc-fill-column (- (window-width) 2))))
 
-;; Color-theme
-(if (eq system-type 'windows-nt)
-    (progn
-    ;; This will not work with the startup screen turned on.
-    (setq default-directory "c:\\Local\\3420\\")
-    (add-to-list 'load-path "~/emacs-lib/color-theme-6.6.0"))
-  )
-(if (eq system-type 'gnu/linux)
-    (progn
-    ;; This will not work with the startup screen turned on.
-    (setq default-directory "/home/morten/")
-    (add-to-list 'load-path "~/emacs-lib/color-theme-6.6.0"))
-  )
-(if (eq system-type 'darwin)
-    (progn
-    ;; This will not work with the startup screen turned on.
-    (setq default-directory "/Users/morten/")
-    (add-to-list 'load-path "~/emacs-lib/color-theme-6.6.0"))
-  )
-
 ;; Standard lib
 (add-to-list 'load-path "~/emacs-lib")
 
@@ -128,9 +108,7 @@
 (prefer-coding-system 'utf-8)
 
 ;; Initialize color-theme
-(require 'color-theme)
-(color-theme-initialize)
-(color-theme-blue-mood)
+(load-theme 'tango-dark)
 
 ;; Load the clock and column number
 (unless (featurep 'xemacs)
