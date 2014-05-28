@@ -2,7 +2,7 @@
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
 			 ("marmalade" . "http://marmalade-repo.org/packages/")
 			 ("melpa" . "http://melpa.milkbox.net/packages/")))
-  
+
 (add-hook 'after-init-hook 'my-after-init-hook)
 (defun my-after-init-hook ()
   ;; do things after Emacs package initialization
@@ -62,6 +62,8 @@
 
   )
 
+
+
 ;;  Avoid the annoying startup message.
 (setq inhibit-startup-message t)
 
@@ -76,6 +78,13 @@
     (interactive);; "Prompt\n shell name:")
     (let ((shell-name (read-string "shell name: " nil)))
     (eshell (concat "*" shell-name "*"))))
+
+;; Autocomplete settings
+(require 'auto-complete)
+(add-to-list 'load-path "~/.emacs.d")
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(require 'auto-complete-config)
+(ac-config-default)
 
 ;; ERC setup
 (require 'erc)
