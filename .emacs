@@ -62,10 +62,11 @@
 
   )
 
-
-
 ;;  Avoid the annoying startup message.
 (setq inhibit-startup-message t)
+
+;; Standard lib
+(add-to-list 'load-path "~/emacs-lib")
 
 ;; Basic window handling
 (scroll-bar-mode -1)
@@ -81,8 +82,8 @@
 
 ;; Autocomplete settings
 (require 'auto-complete)
-(add-to-list 'load-path "~/.emacs.d")
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(add-to-list 'load-path "~/emacs-lib")
+(add-to-list 'ac-dictionary-directories "~/emacs-lib/ac-dict")
 (require 'auto-complete-config)
 (ac-config-default)
 
@@ -105,9 +106,6 @@
 (add-hook 'window-configuration-change-hook 
 	   '(lambda ()
 	      (setq erc-fill-column (- (window-width) 2))))
-
-;; Standard lib
-(add-to-list 'load-path "~/emacs-lib")
 
 ;; directory to put various el files into
 (setq locale-coding-system 'utf-8)
