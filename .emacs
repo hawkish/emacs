@@ -60,6 +60,14 @@
     "Function that hooks `speedbar-visiting-tag-hook'."
     (select-window last-selected-window))
 
+  ;; ESS settings
+  (autoload 'R-mode "ess-site.el" "ESS" t)
+  (add-to-list 'auto-mode-alist '("\\.R$" . R-mode))
+  (setq inferior-R-program-name "R")
+  ;;R stuff
+  (setq ess-eval-visibly-p nil)
+  (setq ess-ask-for-ess-directory nil)
+  (require 'ess-eldoc)
   )
 
 ;;  Avoid the annoying startup message.
