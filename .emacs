@@ -80,6 +80,12 @@
     (let ((shell-name (read-string "shell name: " nil)))
     (eshell (concat "*" shell-name "*"))))
 
+(defun cygwin-shell ()
+  "Run cygwin bash in shell mode."
+  (interactive)
+  (let ((explicit-shell-file-name "C:/cygwin/bin/bash"))
+    (call-interactively 'shell)))
+
 ;; Autocomplete settings
 (require 'auto-complete)
 (add-to-list 'load-path "~/emacs-lib")
