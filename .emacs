@@ -60,14 +60,6 @@
     "Function that hooks `speedbar-visiting-tag-hook'."
     (select-window last-selected-window))
 
-  ;; ESS settings
-  (autoload 'R-mode "ess-site.el" "ESS" t)
-  (add-to-list 'auto-mode-alist '("\\.R$" . R-mode))
-  (setq inferior-R-program-name "R")
-  ;;R stuff
-  (setq ess-eval-visibly-p nil)
-  (setq ess-ask-for-ess-directory nil)
-  (require 'ess-eldoc)
   )
 
 ;;  Avoid the annoying startup message.
@@ -81,14 +73,25 @@
 (set-fringe-mode '(0 . 0))
 
 ;; Create extra shells 
-;; - because I can't remember C-u M-x eshell
 (defun create-shell ()
+    "creates a shell with a given name"
+    (interactive);; "Prompt\n shell name:")
+    (let ((shell-name (read-string "shell name: " nil)))
+    (shell (concat "*" shell-name "*"))))
+
+(defun create-eshell ()
     "creates a shell with a given name"
     (interactive);; "Prompt\n shell name:")
     (let ((shell-name (read-string "shell name: " nil)))
     (eshell (concat "*" shell-name "*"))))
 
-(defun cygwin-shell ()
+(defun create-cygwin ()
+  "Run cygwin bash in shell mode."
+  (interactive)
+  (let ((explicit-shell-file-name "C:/cygwin/bin/bash"))
+    (call-interactively 'shell)))
+
+(defun create-cygwin ()
   "Run cygwin bash in shell mode."
   (interactive)
   (let ((explicit-shell-file-name "C:/cygwin/bin/bash"))
