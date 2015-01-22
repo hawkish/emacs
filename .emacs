@@ -115,10 +115,6 @@
 ;; Nick added. 
 (setq erc-prompt-for-nickserv-password t)
 (setq erc-nick "grayling_")
-;; Fix size of window.
-(add-hook 'window-configuration-change-hook 
-	   '(lambda ()
-	      (setq erc-fill-column (- (window-width) 2))))
 
 ;; directory to put various el files into
 (setq locale-coding-system 'utf-8)
@@ -226,7 +222,7 @@
 (setq tramp-default-method "scp")
 (set-default 'tramp-default-proxies-alist (quote ((".*" "\\`root\\'" "/ssh:%h:"))))
 
-;;Javascript section
+;; Javascript section
 ;; The elisp below Requires an installation of node.js
 ;; eshell needs this in Mac OS. 
 (setenv "NODE_NO_READLINE" "1")
