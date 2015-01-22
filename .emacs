@@ -106,10 +106,6 @@
 
 ;; ERC setup
 (require 'erc)
-(defcustom erc-fill-column 78
-  "The column at which a filled paragraph is broken."
-  :group 'erc-fill
-  :type 'integer)
 ;; Check channels
 (erc-track-mode t)
 (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
