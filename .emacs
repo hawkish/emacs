@@ -254,9 +254,6 @@
 			    ))
 
 
-;; Activate actionscript-mode for any files ending in .as
-(setq auto-mode-alist  (cons '(".as$" . actionscript-mode) auto-mode-alist))
-
 ;; Install mode-compile to give friendlier compiling support!
 (autoload 'mode-compile "mode-compile"
   "Command to compile current buffer file based on the major mode" t)
