@@ -254,11 +254,6 @@
 			    ))
 
 
-;;Actionscript section
-;;(autoload 'actionscript-mode "actionscript-mode" "Major mode for actionscript." t)
-(load-file "~/emacs-lib/actionscript-mode.el")
-(autoload 'actionscript-mode "actionscript-mode" "Major mode for actionscript." t)
-
 ;; Activate actionscript-mode for any files ending in .as
 (setq auto-mode-alist  (cons '(".as$" . actionscript-mode) auto-mode-alist))
 
