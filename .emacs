@@ -130,6 +130,11 @@
 ;;(load-theme 'tango-dark)
 (load-theme 'gotham)
 
+;; Disable tool-bar
+(if window-system
+    (tool-bar-mode -1)
+)
+
 ;; Load the clock and column number
 (unless (featurep 'xemacs)
   (display-time) ; put the current time in the modeline
