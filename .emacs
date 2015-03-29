@@ -178,6 +178,10 @@
       )
 )
 
+;; C, C++ section
+(setq-default c-basic-offset 4)
+(setq-default c-basic-indent 4)
+(setq-default indent-tabs-mode nil)
 
 ;; Go section
 (require 'go-mode-load)
