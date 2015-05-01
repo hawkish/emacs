@@ -206,26 +206,18 @@
 (add-to-list 'auto-mode-alist '("\.gradle$" . groovy-mode))
 
 ;; Haskell section
-;; C-c C-l inferior-haskell-load-file
+;; C-c C-l haskell-load-file
 ;; C-c C-b switch-to-haskell
 ;; On Linux
-(if (eq system-type 'gnu/linux)
-    (progn
-      (setq haskell-program-name "ghci")
-      (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent))
-  )
-;; On Mac
-(if (eq system-type 'darwin)
-    (progn
-      (setq haskell-program-name "ghci")
-      (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent))
-  )
-;; On Windows
-(if (eq system-type 'windows-nt)
-    (progn
-      (setq haskell-program-name "ghci")
-      (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent))
-  )
+(require 'haskell-interactive-mode)
+(require 'haskell-process)
+(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+(custom-set-variables
+  '(haskell-process-suggest-remove-import-lines t)
+  '(haskell-process-auto-import-loaded-modules t)
+  '(haskell-process-log t)
+  '(haskell-process-type 'cabal-repl))
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
 ;; Clojure section
 ;; (require 'paredit) if you didn't install it via package.el
