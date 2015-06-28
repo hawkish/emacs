@@ -147,6 +147,9 @@
 (setq display-time-24hr-format t)
 (display-time)
 
+;; Monaco needs to be installed first.
+;; https://gist.github.com/rogerleite/99819
+;; wget http://www.gringod.com/wp-upload/software/Fonts/Monaco_Linux.ttf
 (if (eq system-type 'gnu/linux)
     (custom-set-faces
      ;; custom-set-faces was added by Custom.
@@ -174,17 +177,6 @@
   )
 
 (setq make-backup-files nil)
-
-;; Erlang section
-(if (eq system-type 'gnu/linux)
-    (progn
-      (setq load-path (cons  "/home/morten/erlang/lib/erlang/lib/tools-2.6.14/emacs"
-      load-path))
-      (setq erlang-root-dir "/home/morten/erlang")
-      (setq exec-path (cons "/home/morten/erlang/bin" exec-path))
-      (require 'erlang-start)
-      )
-)
 
 ;; C, C++ section
 (setq-default c-basic-offset 4)
