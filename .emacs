@@ -203,6 +203,7 @@
 (add-to-list 'auto-mode-alist '("\.gradle$" . groovy-mode))
 
 ;; Haskell section
+;; Now in haskell-mode in Melpa.
 ;; C-c C-l haskell-load-file
 ;; C-c C-b switch-to-haskell
 ;; On Linux
