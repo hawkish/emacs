@@ -4,17 +4,16 @@
   (package-initialize)
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
   )
-
 (add-hook 'after-init-hook 'my-after-init-hook)
 (defun my-after-init-hook ()
-  ;; do things after Emacs package initialization
+  ;; Doc things after Emacs package initialization
   (if (eq system-type 'darwin)
       (progn
 	;; For the exec-path-from-shell needed for Mac OS to read .profile
 	;; https://github.com/purcell/exec-path-from-shell
 	(require 'exec-path-from-shell)
-        (exec-path-from-shell-copy-env "GOROOT")
-	(exec-path-from-shell-copy-env "GOPATH")
+        (exec-path-from-shell-copy-env "LANG")
+        (exec-path-from-shell-copy-env "GEM_HOME")
 	(exec-path-from-shell-initialize))
     )
   (if (eq system-type 'windows-nt)
@@ -86,12 +85,6 @@
     (interactive);; "Prompt\n shell name:")
     (let ((shell-name (read-string "shell name: " nil)))
     (eshell (concat "*" shell-name "*"))))
-
-(defun create-cygwin ()
-  "Run cygwin bash in shell mode."
-  (interactive)
-  (let ((explicit-shell-file-name "C:/cygwin/bin/bash"))
-    (call-interactively 'shell)))
 
 (defun create-cygwin ()
   "Run cygwin bash in shell mode."
@@ -187,12 +180,6 @@
 (setq-default c-basic-offset 4)
 (setq-default c-basic-indent 4)
 (setq-default indent-tabs-mode nil)
-
-;; Go section
-(require 'go-mode-load)
-(unless (eq system-type 'windows-nt)
-  ;; This doesn't work in Windows. Frak!
-  (add-hook 'before-save-hook 'gofmt-before-save))
 
 ;; Groovy and Gradle section
 ;;; use groovy-mode when file ends in .groovy or has #!/bin/groovy at start
