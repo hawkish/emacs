@@ -24,7 +24,11 @@
 	(require 'cygwin-mount)
 	(cygwin-mount-activate))
     )
-     
+  ;; Colors in shell
+  (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
+  (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+  (add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
+    
   ;; Speedbar settings
   (require 'sr-speedbar)
   (global-set-key (kbd "<f8>") 'sr-speedbar-toggle)
@@ -85,6 +89,12 @@
     (interactive);; "Prompt\n shell name:")
     (let ((shell-name (read-string "shell name: " nil)))
     (eshell (concat "*" shell-name "*"))))
+
+(defun create-ansi-term ()
+    "creates a term with a given name"
+    (interactive);; "Prompt\n term name:")
+    (let ((shell-name (read-string "term name: " nil)))
+    (ansi-term "bash" shell-name)))
 
 (defun create-cygwin ()
   "Run cygwin bash in shell mode."
