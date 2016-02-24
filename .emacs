@@ -2,7 +2,7 @@
 (when (>= emacs-major-version 24)
   (require 'package)
   (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
   )
 (add-hook 'after-init-hook 'my-after-init-hook)
 (defun my-after-init-hook ()
@@ -14,6 +14,7 @@
 	(require 'exec-path-from-shell)
         (exec-path-from-shell-copy-env "LANG")
         (exec-path-from-shell-copy-env "GEM_HOME")
+        (exec-path-from-shell-copy-env "SBCL_HOME")
 	(exec-path-from-shell-initialize))
     )
   (if (eq system-type 'windows-nt)
@@ -220,10 +221,9 @@
   '(haskell-process-type 'cabal-repl))
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
-;; Clojure section
-;; (require 'paredit) if you didn't install it via package.el
-(add-hook 'clojure-mode-hook 'paredit-mode)
-(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+;; Lisp
+(setq inferior-lisp-program "~/sbcl/bin/sbcl")
+(setq slime-contribs '(slime-fancy))
 
 ;; Tramp
 (require 'tramp)
