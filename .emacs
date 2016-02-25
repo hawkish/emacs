@@ -6,7 +6,15 @@
   )
 (add-hook 'after-init-hook 'my-after-init-hook)
 (defun my-after-init-hook ()
-  ;; Doc things after Emacs package initialization
+  ;; Do things after Emacs package initialization
+  (if (eq system-type 'gnu/linux)
+      (progn
+	;; For the exec-path-from-shell needed for Mac OS to read .profile
+	;; https://github.com/purcell/exec-path-from-shell
+	(require 'exec-path-from-shell)
+        (exec-path-from-shell-copy-env "SBCL_HOME")
+	(exec-path-from-shell-initialize))
+      )
   (if (eq system-type 'darwin)
       (progn
 	;; For the exec-path-from-shell needed for Mac OS to read .profile
@@ -221,9 +229,12 @@
   '(haskell-process-type 'cabal-repl))
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
-;; Lisp
+;; Lisp section. Install Slime.
 (setq inferior-lisp-program "~/sbcl/bin/sbcl")
 (setq slime-contribs '(slime-fancy))
+
+;; Racket Scheme section. Install Geiser.
+(setq geiser-active-implementations '(racket))
 
 ;; Tramp
 (require 'tramp)
