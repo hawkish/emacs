@@ -233,7 +233,7 @@
 (setq inferior-lisp-program "~/sbcl/bin/sbcl")
 (setq slime-contribs '(slime-fancy))
 
-;; Racket Scheme section. Install Geiser.
+;; Racket Scheme section. Install Geiser. C-c C-a to enter a module to REPL.
 (setq geiser-active-implementations '(racket))
 
 ;; Tramp
