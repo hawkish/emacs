@@ -201,6 +201,9 @@
 
 (setq make-backup-files nil)
 
+;; Flycheck
+(global-flycheck-mode)
+
 ;; C, C++ section
 (setq-default c-basic-offset 4)
 (setq-default c-basic-indent 4)
@@ -235,10 +238,6 @@
 
 ;; Racket Scheme section. Install Geiser. C-c C-a to enter a module to REPL.
 ;;(setq geiser-active-implementations '(racket))
-
-;; Swift section
-;; Require swift-mode and flycheck
-(add-to-list 'flycheck-checkers 'swift)
 
 ;; Tramp
 (require 'tramp)
