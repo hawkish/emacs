@@ -234,7 +234,11 @@
 (setq slime-contribs '(slime-fancy))
 
 ;; Racket Scheme section. Install Geiser. C-c C-a to enter a module to REPL.
-(setq geiser-active-implementations '(racket))
+;;(setq geiser-active-implementations '(racket))
+
+;; Swift section
+;; Require swift-mode and flycheck
+(add-to-list 'flycheck-checkers 'swift)
 
 ;; Tramp
 (require 'tramp)
