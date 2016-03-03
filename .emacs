@@ -158,7 +158,10 @@
 ;; Disable tool-bar
 (if window-system
     (tool-bar-mode -1)
-)
+  )
+
+;; Flycheck
+(global-flycheck-mode)
 
 ;; Load the clock and column number
 (unless (featurep 'xemacs)
@@ -201,13 +204,17 @@
 
 (setq make-backup-files nil)
 
-;; Flycheck
-(global-flycheck-mode)
-
 ;; C, C++ section
 (setq-default c-basic-offset 4)
 (setq-default c-basic-indent 4)
 (setq-default indent-tabs-mode nil)
+
+;; Swift section. Requires swift-mode and fly-mode.
+(if (eq system-type 'darwin)
+    (require 'swift-mode)
+  (setq flycheck-swift-sdk-path "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk")
+  (add-to-list 'flycheck-checkers 'swift)
+  )
 
 ;; Groovy and Gradle section
 ;;; use groovy-mode when file ends in .groovy or has #!/bin/groovy at start
