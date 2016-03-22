@@ -240,6 +240,10 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
 ;; Lisp section. Install Slime.
+;; M-x slime to connect
+;; C-c C-c to compile defun
+;; C-c C-k to compile and load file
+;; C-c C-z to switch to output buffer
 (setq inferior-lisp-program "~/sbcl/bin/sbcl")
 (setq slime-contribs '(slime-fancy))
 
