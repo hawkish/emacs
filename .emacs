@@ -244,7 +244,8 @@
 ;; C-c C-c to compile defun
 ;; C-c C-k to compile and load file
 ;; C-c C-z to switch to output buffer
-(setq inferior-lisp-program "~/sbcl/bin/sbcl")
+;;(setq inferior-lisp-program "~/sbcl/bin/sbcl")
+(setq inferior-lisp-program "/usr/local/bin/clisp")
 (setq slime-contribs '(slime-fancy))
 
 ;; Racket Scheme section. Install Geiser. C-c C-a to enter a module to REPL.
