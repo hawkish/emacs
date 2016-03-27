@@ -239,11 +239,18 @@
   '(haskell-process-type 'cabal-repl))
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
-;; Lisp section. Install Slime.
+;; Lisp section. 
+;; Install Quicklisp:
+;; sbcl --load quicklisp.lisp
+;; (quicklisp-quickstart:install)
+;; (ql:add-to-init-file)
+;; Install Slime using Quicklisp:
+;; (ql:quickload "quicklisp-slime-helper")
 ;; M-x slime to connect
 ;; C-c C-c to compile defun
 ;; C-c C-k to compile and load file
 ;; C-c C-z to switch to output buffer
+(load (expand-file-name "~/quicklisp/slime-helper.el"))
 (setq inferior-lisp-program "~/sbcl/bin/sbcl")
 ;;(setq inferior-lisp-program "/usr/local/bin/clisp")
 ;;(setq inferior-lisp-program "~/ccl/scripts/ccl -K utf-8")
