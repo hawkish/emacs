@@ -250,10 +250,15 @@
 ;; C-c C-c to compile defun
 ;; C-c C-k to compile and load file
 ;; C-c C-z to switch to output buffer
+(require 'slime)
+(add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
+(add-hook 'inf…erior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
+(setq slime-lisp-implementations
+  `((sbcl ("~/sbcl/bin/sbcl"))
+   (clozure ("~/ccl/scripts/ccl -K utf-8"))
+   (clisp ("/usr/bin/clisp" "-q -I"))))
+(slime-setup '(slime-fancy slime-asdf hippie-expand-slime))
 (load (expand-file-name "~/quicklisp/slime-helper.el"))
-(setq inferior-lisp-program "~/sbcl/bin/sbcl")
-;;(setq inferior-lisp-program "/usr/local/bin/clisp")
-;;(setq inferior-lisp-program "~/ccl/scripts/ccl -K utf-8")
 (setq slime-contribs '(slime-fancy))
 
 ;; Racket Scheme section. Install Geiser. C-c C-a to enter a module to REPL.
