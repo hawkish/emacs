@@ -153,7 +153,7 @@
 
 ;; Initialize color-theme
 ;;(load-theme 'tango-dark)
-(load-theme 'leuven t)
+(load-theme 'moe-dark t)
 
 ;; Disable tool-bar
 (if window-system
