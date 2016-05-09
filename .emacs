@@ -153,7 +153,8 @@
 
 ;; Initialize color-theme
 ;;(load-theme 'tango-dark)
-(load-theme 'moe-dark t)
+(require 'moe-theme)
+(moe-dark)
 
 ;; Disable tool-bar
 (if window-system
@@ -223,6 +224,21 @@
 ;; For some reason, these recommendations don't seem to work with Aquamacs
 (add-to-list 'auto-mode-alist '("\.groovy$" . groovy-mode))
 (add-to-list 'auto-mode-alist '("\.gradle$" . groovy-mode))
+
+;; Add prettier lambdas...
+(defun add-pretty-lambda ()
+  "make some word or string show as pretty Unicode symbols"
+  (setq prettify-symbols-alist
+        '(
+          ("lambda" . 955) ; λ
+          ("->" . 8594)    ; →
+          ("=>" . 8658)    ; ⇒
+          ("map" . 8614)   ; ↦
+          )))
+
+(add-hook 'lisp-mode-hook 'add-pretty-lambda)
+(add-hook 'haskell-mode-hook 'add-pretty-lambda)
+(global-prettify-symbols-mode 1)
 
 ;; Haskell section
 ;; Now in haskell-mode in Melpa.
