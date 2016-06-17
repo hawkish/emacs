@@ -231,8 +231,6 @@
   (setq prettify-symbols-alist
         '(
           ("lambda" . 955) ; λ
-          ("->" . 8594)    ; →
-          ("=>" . 8658)    ; ⇒
           )))
 
 (add-hook 'lisp-mode-hook 'add-pretty-lambda)
