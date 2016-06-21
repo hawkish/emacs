@@ -211,6 +211,8 @@
 (setq-default indent-tabs-mode nil)
 
 ;; Swift section. Requires swift-mode and fly-mode.
+;; C-c C-z start repl
+;; C-c C-f load buffer in repl
 (if (eq system-type 'darwin)
     (require 'swift-mode)
   (setq flycheck-swift-sdk-path "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk")
