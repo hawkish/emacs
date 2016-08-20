@@ -1,9 +1,8 @@
 ;; Package archives
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-  )
+(require 'package)
+(package-initialize)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+  
 (add-hook 'after-init-hook 'my-after-init-hook)
 (defun my-after-init-hook ()
   ;; Do things after Emacs package initialization
@@ -162,7 +161,7 @@
   )
 
 ;; Flycheck
-(global-flycheck-mode)
+;;(global-flycheck-mode)
 
 ;; Load the clock and column number
 (unless (featurep 'xemacs)
@@ -233,8 +232,8 @@
   (setq prettify-symbols-alist
         '(
           ("lambda" . 955) ; λ
-          ("->" . 8594) ; →
-          ("<-" . 8592) ; ←
+          ;;("->" . 8594) ; →
+          ;;("<-" . 8592) ; ←
           )))
 
 (add-hook 'lisp-mode-hook 'add-pretty-lambda)
@@ -246,15 +245,9 @@
 ;; C-c C-l haskell-load-file
 ;; C-c C-b switch-to-haskell
 ;; On Linux
-(require 'haskell-interactive-mode)
-(require 'haskell-process)
-(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
-(custom-set-variables
-  '(haskell-process-suggest-remove-import-lines t)
-  '(haskell-process-auto-import-loaded-modules t)
-  '(haskell-process-log t)
-  '(haskell-process-type 'cabal-repl))
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;; Install Intero
+(package-install 'intero)
+(add-hook 'haskell-mode-hook 'intero-mode)
 
 ;; Lisp section. 
 ;; Install Quicklisp:
