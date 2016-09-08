@@ -311,6 +311,37 @@ you should place your code here."
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 
+;; Create extra shells 
+(defun create-shell ()
+  "creates a shell with a given name"
+  (interactive);; "Prompt\n shell name:")
+  (let ((shell-name (read-string "shell name: " nil)))
+    (shell (concat "*" shell-name "*"))))
+
+(defun create-eshell ()
+  "creates a shell with a given name"
+  (interactive);; "Prompt\n shell name:")
+  (let ((shell-name (read-string "shell name: " nil)))
+    (eshell (concat "*" shell-name "*"))))
+
+(defun create-ansi-term ()
+  "creates a term with a given name"
+  (interactive);; "Prompt\n term name:")
+  (let ((shell-name (read-string "term name: " nil)))
+    (ansi-term "bash" shell-name)))
+
+;; ERC setup
+(require 'erc)
+;; Check channels
+(erc-track-mode t)
+(setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
+                                "324" "329" "332" "333" "353" "477"))
+;; Don't show any of this
+(setq erc-hide-list '("JOIN" "PART" "QUIT" "NICK"))
+;; Nick added. 
+(setq erc-prompt-for-nickserv-password t)
+(setq erc-nick "grayling_")
+
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables
