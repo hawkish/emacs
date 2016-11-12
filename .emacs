@@ -84,9 +84,6 @@
 ;;  Avoid the annoying startup message.
 (setq inhibit-startup-message t)
 
-;; Standard lib
-(add-to-list 'load-path "~/emacs-lib")
-
 ;; Basic window handling
 (scroll-bar-mode -1)
 (set-fringe-mode '(0 . 0))
@@ -223,8 +220,6 @@
   (setq prettify-symbols-alist
         '(
           ("lambda" . 955) ; λ
-          ;;("->" . 8594) ; →
-          ;;("<-" . 8592) ; ←
           )))
 
 (add-hook 'lisp-mode-hook 'add-pretty-lambda)
@@ -259,10 +254,8 @@
 (setq inferior-lisp-program "sbcl")
 (setq slime-contribs '(slime-fancy slime-asdf hippie-expand-slime))
 (setq slime-default-lisp 'sbcl)
-;;(slime-repl-set-package "scratchrepl")
-
-;; Racket Scheme section. Install Geiser. C-c C-a to enter a module to REPL.
-;;(setq geiser-active-implementations '(racket))
+(setq show-paren-delay 0)
+(show-paren-mode 1)
 
 ;; Tramp
 (require 'tramp)
