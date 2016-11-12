@@ -209,15 +209,6 @@
 (setq-default c-basic-indent 4)
 (setq-default indent-tabs-mode nil)
 
-;; Swift section. Requires swift-mode and fly-mode.
-;; C-c C-z start repl
-;; C-c C-f load buffer in repl
-(if (eq system-type 'darwin)
-    (require 'swift-mode)
-  (setq flycheck-swift-sdk-path "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk")
-  (add-to-list 'flycheck-checkers 'swift)
-  )
-
 ;; Groovy and Gradle section
 ;;; use groovy-mode when file ends in .groovy or has #!/bin/groovy at start
 (add-to-list 'load-path "~/.emacs.d/groovy")
@@ -278,41 +269,6 @@
 (setq tramp-default-method "scp")
 (set-default 'tramp-default-proxies-alist (quote ((".*" "\\`root\\'" "/ssh:%h:"))))
 
-;;Javascript section
-;; The elisp below Requires an installation of node.js
-;; eshell needs this in Mac OS. 
-(setenv "NODE_NO_READLINE" "1")
-;;
-;; Requires https://code.google.com/p/js2-mode/
-(autoload 'js2-mode "js2" nil t)
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-
-;; Requires http://js-comint-el.sourceforge.net/
-;; Run with M-x run-js
-(require 'js-comint) 
-(setq inferior-js-program-command "node --interactive")
-;; Use your favorited js mode here:
-(add-hook 'js2-mode-hook '(lambda () 
-			    (local-set-key "\C-x\C-e" 
-					   'js-send-last-sexp)
-			    (local-set-key "\C-\M-x" 
-					   'js-send-last-sexp-and-go)
-			    (local-set-key "\C-cb" 
-					   'js-send-buffer)
-			    (local-set-key "\C-c\C-b" 
-					   'js-send-buffer-and-go)
-			    (local-set-key "\C-cl" 
-					   'js-load-file-and-go)
-			    ))
-
-
-;; Install mode-compile to give friendlier compiling support!
-(autoload 'mode-compile "mode-compile"
-  "Command to compile current buffer file based on the major mode" t)
-(global-set-key "\C-cc" 'mode-compile)
-(autoload 'mode-compile-kill "mode-compile"
-  "Command to kill a compilation launched by `mode-compile'" t)
-(global-set-key "\C-ck" 'mode-compile-kill)
 
 
 
