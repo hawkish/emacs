@@ -1,8 +1,43 @@
 ;; Package archives
 (require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives
+         '("marmalade" .
+           "https://marmalade-repo.org/packages/"))
+
 (package-initialize)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-  
+
+(setq package-selected-packages
+      '(
+        company
+        exec-path-from-shell
+        slime
+        slime-company
+        auto-complete
+        erc
+        spaceline
+	spacemacs-theme
+        ))
+
+(defun install-packages ()
+  "Install all required packages."
+  (interactive)
+  (unless package-archive-contents
+    (package-refresh-contents))
+  (dolist (package package-selected-packages)
+    (unless (package-installed-p package)
+      (package-install package))))
+
+(install-packages)
+
+;; load spacemacs theme
+(load-theme 'spacemacs-dark t)
+
+;; load the spaceline modeline theme
+(require 'spaceline-config)
+(spaceline-emacs-theme)
+
 (add-hook 'after-init-hook 'my-after-init-hook)
 (defun my-after-init-hook ()
   ;; Do things after Emacs package initialization
@@ -35,46 +70,8 @@
   ;; Colors in shell
   (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
   (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-  (add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
+  (add-to-list 'comint-output-filter-functions 'ansi-color-process-output))
     
-  ;; Speedbar settings
-  (require 'sr-speedbar)
-  (global-set-key (kbd "<f8>") 'sr-speedbar-toggle)
-  (setq sr-speedbar-right-side nil)
-  (setq sr-speedbar-auto-refresh nil)
-  (setq speedbar-smart-directory-expand-flag t)
-  (setq speedbar-use-images nil)
-  (setq speedbar-show-unknown-files t) 
-  (setq speedbar-hide-button-brackets-flag t)
-  (setq speedbar-directory-unshown-regexp "^$")
-  (setq sr-speedbar-skip-other-window-p t)
-  (sr-speedbar-open)
-  ;; From graphene-speedbar.el
-  ;; Always use the last selected window for loading files from speedbar.
-  (defvar last-selected-window
-    (if (not (eq (selected-window) sr-speedbar-window))
-	(selected-window)
-      (other-window 1)))
-  (defadvice select-window (after remember-selected-window activate)
-    "Remember the last selected window."
-    (unless (or (eq (selected-window) sr-speedbar-window)
-		(not (window-live-p (selected-window))))
-      (setq last-selected-window (selected-window))))
-  (defun sr-speedbar-before-visiting-file-hook ()
-    "Function that hooks `speedbar-before-visiting-file-hook'."
-    (select-window last-selected-window))
-  (defun sr-speedbar-before-visiting-tag-hook ()
-    "Function that hooks `speedbar-before-visiting-tag-hook'."
-    (select-window last-selected-window))
-  (defun sr-speedbar-visiting-file-hook ()
-    "Function that hooks `speedbar-visiting-file-hook'."
-    (select-window last-selected-window))
-  (defun sr-speedbar-visiting-tag-hook ()
-    "Function that hooks `speedbar-visiting-tag-hook'."
-    (select-window last-selected-window))
-
-  )
-
 ;; scroll one line at a time (less "jumpy" than defaults)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
@@ -149,8 +146,8 @@
 
 ;; Initialize color-theme
 ;;(load-theme 'tango-dark)
-(require 'moe-theme)
-(moe-dark)
+;;(require 'moe-theme)
+;;(moe-dark)
 
 ;; Disable tool-bar
 (if window-system
@@ -261,7 +258,17 @@
 (require 'tramp)
 (setq tramp-default-method "scp")
 (set-default 'tramp-default-proxies-alist (quote ((".*" "\\`root\\'" "/ssh:%h:"))))
-
-
-
-
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (intero company exec-path-from-shell slime slime-company auto-complete erc spaceline spacemacs-theme))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:height 120 :width normal :family "Monaco")))))
