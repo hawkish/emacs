@@ -18,6 +18,8 @@
         erc
         spaceline
 	spacemacs-theme
+        kotlin-mode
+        groovy-mode
         ))
 
 (defun install-packages ()
