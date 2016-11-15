@@ -20,6 +20,8 @@
 	spacemacs-theme
         kotlin-mode
         groovy-mode
+        ivy
+        counsel
         ))
 
 (defun install-packages ()
@@ -35,6 +37,13 @@
 
 ;; load spacemacs theme
 (load-theme 'spacemacs-dark t)
+
+;; Ivy mode
+(ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
+(global-set-key "\C-s" 'swiper)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
 
 ;; load the spaceline modeline theme
 (require 'spaceline-config)
