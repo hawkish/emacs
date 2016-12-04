@@ -52,15 +52,20 @@
 (add-hook 'after-init-hook 'my-after-init-hook)
 (defun my-after-init-hook ()
   ;; Do things after Emacs package initialization
-  (if (eq system-type 'gnu/linux)
+  (when (eq system-type 'gnu/linux)
       (progn
 	;; For the exec-path-from-shell needed for Mac OS to read .profile
 	;; https://github.com/purcell/exec-path-from-shell
 	(require 'exec-path-from-shell)
         (exec-path-from-shell-copy-env "SBCL_HOME")
-	(exec-path-from-shell-initialize))
+	(exec-path-from-shell-initialize)
+        ;; Monaco needs to be installed first.
+        ;; https://gist.github.com/rogerleite/99819
+        ;; wget http://www.gringod.com/wp-upload/software/Fonts/Monaco_Linux.ttf
+        (set-frame-font "Monaco-10")) 
+
       )
-  (if (eq system-type 'darwin)
+  (when (eq system-type 'darwin)
       (progn
 	;; For the exec-path-from-shell needed for Mac OS to read .profile
 	;; https://github.com/purcell/exec-path-from-shell
@@ -68,7 +73,16 @@
         (exec-path-from-shell-copy-env "LANG")
         (exec-path-from-shell-copy-env "GEM_HOME")
         (exec-path-from-shell-copy-env "SBCL_HOME")
-	(exec-path-from-shell-initialize))
+	(exec-path-from-shell-initialize)
+        ;; Monaco needs to be installed first.
+        ;; https://gist.github.com/rogerleite/99819
+        ;; wget http://www.gringod.com/wp-upload/software/Fonts/Monaco_Linux.ttf
+        (set-frame-font "Monaco-10")
+        (setq default-input-method "MacOSX")
+        (setq mac-command-modifier 'meta
+              mac-option-modifier nil
+              mac-command-key-is-meta t))
+
     )
   (if (eq system-type 'windows-nt)
       (progn
@@ -178,21 +192,6 @@
 (setq display-time-24hr-format t)
 (display-time)
 
-;; Monaco needs to be installed first.
-;; https://gist.github.com/rogerleite/99819
-;; wget http://www.gringod.com/wp-upload/software/Fonts/Monaco_Linux.ttf
-(if (eq system-type 'gnu/linux)
-    (set-default-font "Monaco" "10")
-  )
-
-(if (eq system-type 'darwin)
-    (progn
-      (set-default-font "Monaco" "10")
-      (setq default-input-method "MacOSX")
-      (setq mac-command-modifier 'meta
-            mac-option-modifier nil
-            mac-command-key-is-meta t)))
-
 (setq make-backup-files nil)
 
 ;; C, C++ section
@@ -261,12 +260,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(column-number-mode t)
+ '(display-time-mode t)
  '(package-selected-packages
    (quote
-    (intero company exec-path-from-shell slime slime-company auto-complete erc spaceline spacemacs-theme kotlin-mode groovy-mode ivy counsel))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:height 120 :width normal :family "Monaco")))))
+    (intero company exec-path-from-shell slime slime-company auto-complete erc spaceline spacemacs-theme kotlin-mode groovy-mode ivy counsel)) t)
+ '(show-paren-mode t)
+ '(tool-bar-mode nil))
+
