@@ -77,7 +77,7 @@
         ;; Monaco needs to be installed first.
         ;; https://gist.github.com/rogerleite/99819
         ;; wget http://www.gringod.com/wp-upload/software/Fonts/Monaco_Linux.ttf
-        (set-frame-font "Monaco-10")
+        (set-frame-font "Monaco-12")
         (setq default-input-method "MacOSX")
         (setq mac-command-modifier 'meta
               mac-option-modifier nil
@@ -264,7 +264,13 @@
  '(display-time-mode t)
  '(package-selected-packages
    (quote
-    (intero company exec-path-from-shell slime slime-company auto-complete erc spaceline spacemacs-theme kotlin-mode groovy-mode ivy counsel)) t)
+    (intero company exec-path-from-shell slime slime-company auto-complete erc spaceline spacemacs-theme kotlin-mode groovy-mode ivy counsel)))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
