@@ -22,6 +22,7 @@
         groovy-mode
         ivy
         counsel
+        auctex
         ))
 
 (defun install-packages ()
