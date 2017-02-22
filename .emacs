@@ -63,7 +63,8 @@
         ;; Monaco needs to be installed first.
         ;; https://gist.github.com/rogerleite/99819
         ;; wget http://www.gringod.com/wp-upload/software/Fonts/Monaco_Linux.ttf
-        (set-frame-font "Monaco-10")) 
+        (set-frame-font "Monaco-10")
+        (setq default-directory "~/Documents/git/")) 
 
       )
   (when (eq system-type 'darwin)
@@ -79,6 +80,7 @@
         ;; https://gist.github.com/rogerleite/99819
         ;; wget http://www.gringod.com/wp-upload/software/Fonts/Monaco_Linux.ttf
         (set-frame-font "Monaco-12")
+        (setq default-directory "~/Documents/git/")
         (setq default-input-method "MacOSX")
         (setq mac-command-modifier 'meta
               mac-option-modifier nil
@@ -169,11 +171,6 @@
   (set-selection-coding-system 'utf-8))
 (prefer-coding-system 'utf-8)
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
-
-;; Initialize color-theme
-;;(load-theme 'tango-dark)
-;;(require 'moe-theme)
-;;(moe-dark)
 
 ;; Disable tool-bar
 (if window-system
