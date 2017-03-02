@@ -23,6 +23,7 @@
         ivy
         counsel
         auctex
+        ruby-mode
         ))
 
 (defun install-packages ()
@@ -144,6 +145,10 @@
 (require 'auto-complete-config)
 (ac-config-default)
 
+;; Adding to ruby-mode
+(add-to-list 'auto-mode-alist '("Fastfile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Podfile$" . ruby-mode))
+
 ;; ERC setup
 (require 'erc)
 ;; Check channels
@@ -262,7 +267,7 @@
  '(display-time-mode t)
  '(package-selected-packages
    (quote
-    (intero company exec-path-from-shell slime slime-company auto-complete erc spaceline spacemacs-theme kotlin-mode groovy-mode ivy counsel)))
+    (ruby-mode intero company exec-path-from-shell slime slime-company auto-complete erc spaceline spacemacs-theme kotlin-mode groovy-mode ivy counsel)))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
