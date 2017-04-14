@@ -24,6 +24,8 @@
         counsel
         auctex
         ruby-mode
+        julia-mode
+        julia-shell
         ))
 
 (defun install-packages ()
@@ -196,6 +198,15 @@
 (display-time)
 
 (setq make-backup-files nil)
+
+;; Julia section
+(add-to-list 'load-path "/Applications/JuliaPro-0.5.1.1.app/Contents/Resources/julia/Contents/Resources/julia/bin")
+(require 'julia-shell)
+(defun my-julia-mode-hooks ()
+  (require 'julia-shell-mode))
+(add-hook 'julia-mode-hook 'my-julia-mode-hooks)
+(define-key julia-mode-map (kbd "C-c C-c") 'julia-shell-run-region-or-line)
+(define-key julia-mode-map (kbd "C-c C-s") 'julia-shell-save-and-go)
 
 ;; C, C++ section
 (setq-default c-basic-offset 4)
