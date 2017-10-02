@@ -2,9 +2,9 @@
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives
-         '("marmalade" .
-           "https://marmalade-repo.org/packages/"))
+;;(add-to-list 'package-archives
+;;         '("marmalade" .
+;;           "https://marmalade-repo.org/packages/"))
 
 (package-initialize)
 
@@ -25,6 +25,8 @@
         auctex
         ruby-mode
         yaml-mode
+        swift-mode
+        geiser
         ))
 
 (defun install-packages ()
@@ -254,6 +256,10 @@
 (setq show-paren-delay 0)
 (show-paren-mode 1)
 
+;; Scheme section.
+;; Selecting racket as default implementation of Scheme.
+(setq geiser-active-implementations '(racket))
+
 ;; Tramp
 (require 'tramp)
 (setq tramp-default-method "scp")
@@ -268,7 +274,7 @@
  '(display-time-mode t)
  '(package-selected-packages
    (quote
-    (ruby-mode intero company exec-path-from-shell slime slime-company auto-complete erc spaceline spacemacs-theme kotlin-mode groovy-mode ivy counsel)))
+    (geiser ruby-mode intero company exec-path-from-shell slime slime-company auto-complete erc spaceline spacemacs-theme kotlin-mode groovy-mode ivy counsel)))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
