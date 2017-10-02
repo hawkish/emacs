@@ -257,7 +257,10 @@
 (show-paren-mode 1)
 
 ;; Scheme section.
+;; C-c C-k to compile and load file
+;; C-c C-a to jump to REPL and switch module
 ;; Selecting racket as default implementation of Scheme.
+(add-hook 'scheme-mode-hook 'geiser-mode)
 (setq geiser-active-implementations '(racket))
 
 ;; Tramp
