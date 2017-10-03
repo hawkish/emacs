@@ -223,6 +223,9 @@
 
 (add-hook 'lisp-mode-hook 'add-pretty-lambda)
 (add-hook 'haskell-mode-hook 'add-pretty-lambda)
+(add-hook 'scheme-mode-hook 'add-pretty-lambda)
+(add-hook 'racket-mode-hook 'add-pretty-lambda)
+(add-hook 'geiser-mode-hook 'add-pretty-lambda)
 (global-prettify-symbols-mode 1)
 
 ;; Haskell section
