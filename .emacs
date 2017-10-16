@@ -2,9 +2,6 @@
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
-;;(add-to-list 'package-archives
-;;         '("marmalade" .
-;;           "https://marmalade-repo.org/packages/"))
 
 (package-initialize)
 
@@ -265,6 +262,8 @@
 ;; Selecting racket as default implementation of Scheme.
 (add-hook 'scheme-mode-hook 'geiser-mode)
 (setq geiser-active-implementations '(racket))
+
+;; Julia
 
 ;; Tramp
 (require 'tramp)
