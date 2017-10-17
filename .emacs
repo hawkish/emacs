@@ -264,6 +264,12 @@
 (setq geiser-active-implementations '(racket))
 
 ;; Julia
+(add-to-list 'load-path "~/.emacs.d/elpa/julia-mode-2017916.628")
+(require 'julia-mode)
+(add-to-list 'load-path "~/.emacs.d/elpa/julia-repl-20171005.123")
+(require 'julia-repl)
+(add-hook 'julia-mode-hook 'julia-repl-mode)
+
 
 ;; Tramp
 (require 'tramp)
