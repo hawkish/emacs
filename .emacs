@@ -24,7 +24,11 @@
         yaml-mode
         swift-mode
         geiser
+        julia-mode
+        julia-repl
         ))
+
+(package-install-selected-packages)
 
 (defun install-packages ()
   "Install all required packages."
