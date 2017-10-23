@@ -42,7 +42,8 @@
 (install-packages)
 
 ;; load spacemacs theme
-(load-theme 'spacemacs-dark t)
+;;(load-theme 'spacemacs-dark t)
+(load-theme 'zenburn t)
 
 ;; Ivy mode
 (ivy-mode 1)
