@@ -15,6 +15,7 @@
         erc
         spaceline
 	spacemacs-theme
+	zenburn-theme
         kotlin-mode
         groovy-mode
         ivy
