@@ -15,7 +15,7 @@
         erc
         spaceline
 	spacemacs-theme
-	zenburn-theme
+        zenburn-theme
         kotlin-mode
         groovy-mode
         ivy
@@ -56,6 +56,9 @@
 ;; load the spaceline modeline theme
 (require 'spaceline-config)
 (spaceline-emacs-theme)
+
+;; Stop the infernal bell
+(setq ring-bell-function #'ignore)
 
 (add-hook 'after-init-hook 'my-after-init-hook)
 (defun my-after-init-hook ()
