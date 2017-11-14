@@ -101,11 +101,12 @@
 	(setq exec-path (cons "c:/cygwin/bin/" exec-path))
 	(require 'cygwin-mount)
 	(cygwin-mount-activate))
-    )
-  ;; Colors in shell
-  (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
-  (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-  (add-to-list 'comint-output-filter-functions 'ansi-color-process-output))
+    ))
+
+;; Colors in shell
+(ansi-color-for-comint-mode-on)
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+(add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
     
 ;; scroll one line at a time (less "jumpy" than defaults)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
