@@ -120,6 +120,9 @@
 ;;  Avoid the annoying startup message.
 (setq inhibit-startup-message t)
 
+;; Enable auto revert mode. So I don't have to.
+(global-auto-revert-mode t)
+
 ;; Basic window handling
 (scroll-bar-mode -1)
 (set-fringe-mode '(0 . 0))
