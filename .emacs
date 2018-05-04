@@ -27,6 +27,8 @@
         geiser
         julia-mode
         julia-repl
+        alchemist
+        elixir-mode
         ))
 
 (package-install-selected-packages)
@@ -73,7 +75,7 @@
         ;; Monaco needs to be installed first.
         ;; https://gist.github.com/rogerleite/99819
         ;; wget http://www.gringod.com/wp-upload/software/Fonts/Monaco_Linux.ttf
-        (set-frame-font "Monaco-10")
+        (set-frame-font "Monaco-12" t t)
         (setq default-directory "~/Documents/git/")) 
 
       )
@@ -89,7 +91,7 @@
         ;; Monaco needs to be installed first.
         ;; https://gist.github.com/rogerleite/99819
         ;; wget http://www.gringod.com/wp-upload/software/Fonts/Monaco_Linux.ttf
-        (set-frame-font "Monaco-12")
+        (set-frame-font "Monaco-12" t t)
         (setq default-directory "~/Documents/git/")
         (setq default-input-method "MacOSX")
         (setq mac-command-modifier 'meta
@@ -209,19 +211,6 @@
 
 (setq make-backup-files nil)
 
-;; C, C++ section
-(setq-default c-basic-offset 4)
-(setq-default c-basic-indent 4)
-(setq-default indent-tabs-mode nil)
-
-;; Groovy and Gradle section
-;;; use groovy-mode when file ends in .groovy or has #!/bin/groovy at start
-(add-to-list 'load-path "~/.emacs.d/groovy")
-(autoload 'groovy-mode "groovy-mode" "Major mode for editing Groovy code." t)
-;; For some reason, these recommendations don't seem to work with Aquamacs
-(add-to-list 'auto-mode-alist '("\.groovy$" . groovy-mode))
-(add-to-list 'auto-mode-alist '("\.gradle$" . groovy-mode))
-
 ;; Add prettier lambdas...
 (defun add-pretty-lambda ()
   "make some word or string show as pretty Unicode symbols"
@@ -268,12 +257,23 @@
 (setq show-paren-delay 0)
 (show-paren-mode 1)
 
-;; Scheme section.
+;; Racket section.
 ;; C-c C-k to compile and load file
 ;; C-c C-a to jump to REPL and switch module
 ;; Selecting racket as default implementation of Scheme.
 (add-hook 'scheme-mode-hook 'geiser-mode)
 (setq geiser-active-implementations '(racket))
+
+;; Elixir section.
+(require 'elixir-mode)
+(add-to-list 'elixir-mode-hook 'alchemist-mode)
+(add-to-list 'elixir-mode-hook 'company-mode)
+;;(add-to-list 'elixir-mode-hook 'ruby-end-mode)
+(setq alchemist-mix-command "/usr/local/Cellar/elixir/1.6.4/bin/mix")
+(setq alchemist-iex-program-name "/usr/local/Cellar/elixir/1.6.4/bin/iex")
+(setq alchemist-compile-command "/usr/local/Cellar/elixir/1.6.4/bin/elixirc")
+(setq alchemist-key-command-prefix (kbd "C-c a"))
+
 
 ;; Julia
 (add-to-list 'load-path "~/.emacs.d/elpa/julia-mode-2017916.628")
@@ -297,7 +297,7 @@
  '(display-time-mode t)
  '(package-selected-packages
    (quote
-    (geiser ruby-mode intero company exec-path-from-shell slime slime-company auto-complete erc spaceline spacemacs-theme kotlin-mode groovy-mode ivy counsel)))
+    (ac-alchemist geiser ruby-mode intero company exec-path-from-shell slime slime-company auto-complete erc spaceline spacemacs-theme kotlin-mode groovy-mode ivy counsel)))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
