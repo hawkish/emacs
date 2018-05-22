@@ -21,7 +21,6 @@
         ivy
         counsel
         auctex
-        ruby-mode
         yaml-mode
         swift-mode
         geiser
@@ -29,6 +28,9 @@
         julia-repl
         alchemist
         elixir-mode
+	js2-mode
+	js2-refactor
+	xref-js2
         ))
 
 (package-install-selected-packages)
@@ -283,6 +285,20 @@
 (require 'julia-repl)
 (add-hook 'julia-mode-hook 'julia-repl-mode)
 
+;; Javascript
+(require 'js2-mode)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+(require 'js2-refactor)
+(require 'xref-js2)
+(add-hook 'js2-mode-hook #'js2-refactor-mode)
+(js2r-add-keybindings-with-prefix "C-c C-r")
+(define-key js2-mode-map (kbd "C-k") #'js2r-kill)
+;; js-mode (which js2 is based on) binds "M-." which conflicts with xref, so
+;; unbind it.
+(define-key js-mode-map (kbd "M-.") nil)
+(add-hook 'js2-mode-hook (lambda ()
+  (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
 
 ;; Tramp
 (require 'tramp)
