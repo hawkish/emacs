@@ -31,6 +31,7 @@
 	js2-mode
 	js2-refactor
 	xref-js2
+	rjsx-mode
         ))
 
 (package-install-selected-packages)
@@ -277,17 +278,9 @@
 (setq alchemist-compile-command "/usr/local/Cellar/elixir/1.6.4/bin/elixirc")
 (setq alchemist-key-command-prefix (kbd "C-c a"))
 
-
-;; Julia
-(add-to-list 'load-path "~/.emacs.d/elpa/julia-mode-2017916.628")
-(require 'julia-mode)
-(add-to-list 'load-path "~/.emacs.d/elpa/julia-repl-20171005.123")
-(require 'julia-repl)
-(add-hook 'julia-mode-hook 'julia-repl-mode)
-
 ;; Javascript
 (require 'js2-mode)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+;;(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
 (require 'js2-refactor)
 (require 'xref-js2)
@@ -298,7 +291,11 @@
 ;; unbind it.
 (define-key js-mode-map (kbd "M-.") nil)
 (add-hook 'js2-mode-hook (lambda ()
-  (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
+			   (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
+(require 'rjsx-mode)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
+
+
 
 ;; Tramp
 (require 'tramp)
