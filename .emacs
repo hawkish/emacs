@@ -32,6 +32,7 @@
 	js2-refactor
 	xref-js2
 	rjsx-mode
+	org
         ))
 
 (package-install-selected-packages)
@@ -295,7 +296,11 @@
 (require 'rjsx-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
 
-
+;; Org mode
+(require 'org)
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
 
 ;; Tramp
 (require 'tramp)
