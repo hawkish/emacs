@@ -33,6 +33,8 @@
 	xref-js2
 	rjsx-mode
 	org
+	flycheck
+	flyspell-correct-popup
         ))
 
 (package-install-selected-packages)
@@ -201,9 +203,6 @@
     (tool-bar-mode -1)
   )
 
-;; Flycheck
-;;(global-flycheck-mode)
-
 ;; Load the clock and column number
 (unless (featurep 'xemacs)
   (display-time) ; put the current time in the modeline
@@ -301,6 +300,31 @@
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
+
+;; Spellcheck
+;; brew install hunspell
+;; Place a .aff and a .dic in "$HOME/Library/Spelling" for each language.
+;; https://github.com/wooorm/dictionaries/tree/master/dictionaries
+(setq ispell-program-name "hunspell")
+(setq ispell-dictionary "da_DK")
+(global-set-key (kbd "C-c D")
+          (lambda ()
+            (interactive)
+            (ispell-change-dictionary "da_DK")
+            (flyspell-buffer)))
+
+(global-set-key (kbd "C-c E")
+          (lambda ()
+            (interactive)
+            (ispell-change-dictionary "en_US")
+            (flyspell-buffer)))
+;; Tell ispell-mode to use hunspell.
+(require 'flyspell)
+(add-hook 'org-mode-hook 'turn-on-flyspell)
+;;(global-flycheck-mode)
+(require 'flyspell-correct-popup)
+(define-key flyspell-mode-map (kbd "C-c O") 'flyspell-correct-previous-word-generic)
+
 
 ;; Tramp
 (require 'tramp)
