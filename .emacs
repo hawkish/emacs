@@ -35,6 +35,7 @@
 	org
 	flycheck
 	flyspell-correct-popup
+	magit
         ))
 
 (package-install-selected-packages)
@@ -169,6 +170,9 @@
 ;; Adding to ruby-mode
 (add-to-list 'auto-mode-alist '("Fastfile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Podfile$" . ruby-mode))
+
+;; Magit
+(global-set-key (kbd "C-x g") 'magit-status)
 
 ;; ERC setup
 (require 'erc)
