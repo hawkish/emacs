@@ -82,7 +82,7 @@
         ;; Monaco needs to be installed first.
         ;; https://gist.github.com/rogerleite/99819
         ;; wget http://www.gringod.com/wp-upload/software/Fonts/Monaco_Linux.ttf
-        (set-frame-font "Monaco-12" t t)
+        (set-frame-font "Menlo-12" t t)
         (setq default-directory "~/Documents/git/")) 
 
       )
@@ -98,7 +98,7 @@
         ;; Monaco needs to be installed first.
         ;; https://gist.github.com/rogerleite/99819
         ;; wget http://www.gringod.com/wp-upload/software/Fonts/Monaco_Linux.ttf
-        (set-frame-font "Monaco-12" t t)
+        (set-frame-font "Menlo-12" t t)
         (setq default-directory "~/Documents/git/")
         (setq default-input-method "MacOSX")
         (setq mac-command-modifier 'meta
@@ -299,6 +299,10 @@
 (require 'rjsx-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
 
+;; CLIPS mode
+;;(require 'clips-mode)
+;;(setq inferior-clips-program "")
+
 ;; Org mode
 (require 'org)
 (define-key global-map "\C-cl" 'org-store-link)
@@ -331,7 +335,6 @@
 ;;(global-flycheck-mode)
 (require 'flyspell-correct-popup)
 (define-key flyspell-mode-map (kbd "C-c O") 'flyspell-correct-previous-word-generic)
-
 
 ;; Tramp
 (require 'tramp)
