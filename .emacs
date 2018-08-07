@@ -36,6 +36,7 @@
 	flycheck
 	flyspell-correct-popup
 	magit
+	clips-mode
         ))
 
 (package-install-selected-packages)
@@ -300,8 +301,8 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
 
 ;; CLIPS mode
-;;(require 'clips-mode)
-;;(setq inferior-clips-program "")
+(require 'clips-mode)
+(setq inferior-clips-program "~/clips/clips")
 
 ;; Org mode
 (require 'org)
@@ -350,7 +351,7 @@
  '(display-time-mode t)
  '(package-selected-packages
    (quote
-    (ac-alchemist geiser ruby-mode intero company exec-path-from-shell slime slime-company auto-complete erc spaceline spacemacs-theme kotlin-mode groovy-mode ivy counsel)))
+    (clips-mode ac-alchemist geiser ruby-mode intero company exec-path-from-shell slime slime-company auto-complete erc spaceline spacemacs-theme kotlin-mode groovy-mode ivy counsel)))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
