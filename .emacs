@@ -37,6 +37,7 @@
 	flyspell-correct-popup
 	magit
 	clips-mode
+	multi-term
         ))
 
 (package-install-selected-packages)
@@ -69,6 +70,9 @@
 
 ;; Stop the infernal bell
 (setq ring-bell-function #'ignore)
+
+;; Setup multi-term
+(require 'multi-term)
 
 (add-hook 'after-init-hook 'my-after-init-hook)
 (defun my-after-init-hook ()
@@ -143,6 +147,12 @@
     (interactive);; "Prompt\n shell name:")
     (let ((shell-name (read-string "shell name: " nil)))
     (shell (concat "*" shell-name "*"))))
+
+(defun create-zsh ()
+  "Make a multi-term buffer."
+  (interactive)
+  (let ((multi-term-program "zsh"))
+    (multi-term)))
 
 (defun create-eshell ()
     "creates a shell with a given name"
