@@ -24,8 +24,6 @@
         yaml-mode
         swift-mode
         geiser
-        julia-mode
-        julia-repl
         alchemist
         elixir-mode
 	js2-mode
@@ -292,6 +290,15 @@
 (setq alchemist-iex-program-name "/usr/local/Cellar/elixir/1.6.4/bin/iex")
 (setq alchemist-compile-command "/usr/local/Cellar/elixir/1.6.4/bin/elixirc")
 (setq alchemist-key-command-prefix (kbd "C-c a"))
+
+;; Prolog
+(autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)
+(autoload 'prolog-mode "prolog" "Major mode for editing Prolog programs." t)
+(autoload 'mercury-mode "prolog" "Major mode for editing Mercury programs." t)
+(setq prolog-system 'swi)
+(setq auto-mode-alist (append '(("\\.pl$" . prolog-mode)
+                                ("\\.m$" . mercury-mode))
+			      auto-mode-alist))
 
 ;; Javascript
 (require 'js2-mode)
