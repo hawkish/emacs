@@ -36,6 +36,9 @@
 	magit
 	clips-mode
 	multi-term
+	typescript-mode
+	ts-comint
+	tide
         ))
 
 (package-install-selected-packages)
@@ -316,6 +319,43 @@
 			   (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
 (require 'rjsx-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
+
+;; Typescript mode
+(require 'ansi-color)
+(defun colorize-compilation-buffer ()
+  (ansi-color-apply-on-region compilation-filter-start (point-max)))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
+;; ts-comint
+(require 'ts-comint)
+(add-hook 'typescript-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-x C-e") 'ts-send-last-sexp)
+            (local-set-key (kbd "C-M-x") 'ts-send-last-sexp-and-go)
+            (local-set-key (kbd "C-c b") 'ts-send-buffer)
+            (local-set-key (kbd "C-c C-b") 'ts-send-buffer-and-go)
+            (local-set-key (kbd "C-c l") 'ts-load-file-and-go)))
+
+;; Tide mode
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
+  (company-mode +1))
+
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+
+;; formats the buffer before saving
+(add-hook 'before-save-hook 'tide-format-before-save)
+
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
 
 ;; CLIPS mode
 (require 'clips-mode)
