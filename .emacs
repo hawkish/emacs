@@ -111,15 +111,8 @@
               mac-option-modifier nil
               mac-command-key-is-meta t))
 
-    )
-  (if (eq system-type 'windows-nt)
-      (progn
-	;; Cygwin
-	(setenv "PATH" (concat "c:/cygwin/bin;" (getenv "PATH")))
-	(setq exec-path (cons "c:/cygwin/bin/" exec-path))
-	(require 'cygwin-mount)
-	(cygwin-mount-activate))
     ))
+  
 
 ;; Colors in shell
 (ansi-color-for-comint-mode-on)
@@ -166,12 +159,6 @@
     (interactive);; "Prompt\n term name:")
     (let ((shell-name (read-string "term name: " nil)))
     (ansi-term "bash" shell-name)))
-
-(defun create-cygwin ()
-  "Run cygwin bash in shell mode."
-  (interactive)
-  (let ((explicit-shell-file-name "C:/cygwin/bin/bash"))
-    (call-interactively 'shell)))
 
 ;; Autocomplete settings
 (require 'auto-complete)
@@ -267,12 +254,11 @@
 ;; C-c C-k to compile and load file
 ;; C-c C-z to switch to output buffer
 (setq slime-lisp-implementations
-  `((sbcl ("~/sbcl/bin/sbcl"))
+  `((sbcl ("/usr/local/Cellar/sbcl/1.4.14/bin/sbcl"))
    (clozure ("~/ccl/scripts/ccl -K utf-8"))
    (clisp ("/usr/bin/clisp" "-q -I"))))
 (load (expand-file-name "~/quicklisp/slime-helper.el"))
 (setq inferior-lisp-program "sbcl")
-(setq slime-contribs '(slime-fancy slime-asdf hippie-expand-slime))
 (setq slime-default-lisp 'sbcl)
 (setq show-paren-delay 0)
 (show-paren-mode 1)
@@ -283,16 +269,6 @@
 ;; Selecting racket as default implementation of Scheme.
 (add-hook 'scheme-mode-hook 'geiser-mode)
 (setq geiser-active-implementations '(racket))
-
-;; Elixir section.
-(require 'elixir-mode)
-(add-to-list 'elixir-mode-hook 'alchemist-mode)
-(add-to-list 'elixir-mode-hook 'company-mode)
-;;(add-to-list 'elixir-mode-hook 'ruby-end-mode)
-(setq alchemist-mix-command "/usr/local/Cellar/elixir/1.6.4/bin/mix")
-(setq alchemist-iex-program-name "/usr/local/Cellar/elixir/1.6.4/bin/iex")
-(setq alchemist-compile-command "/usr/local/Cellar/elixir/1.6.4/bin/elixirc")
-(setq alchemist-key-command-prefix (kbd "C-c a"))
 
 ;; Prolog
 (autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)
@@ -356,10 +332,6 @@
 (add-hook 'before-save-hook 'tide-format-before-save)
 
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
-
-;; CLIPS mode
-(require 'clips-mode)
-(setq inferior-clips-program "~/clips/clips")
 
 ;; Org mode
 (require 'org)
