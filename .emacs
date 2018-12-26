@@ -40,7 +40,6 @@
 	typescript-mode
 	ts-comint
 	tide
-	proof-general
         ))
 
 (package-install-selected-packages)
