@@ -2,7 +2,8 @@
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
-
+(when (not package-archive-contents)
+    (package-refresh-contents))
 (package-initialize)
 
 (setq package-selected-packages
@@ -39,6 +40,7 @@
 	typescript-mode
 	ts-comint
 	tide
+	proof-general
         ))
 
 (package-install-selected-packages)
