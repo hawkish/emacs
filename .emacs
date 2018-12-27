@@ -373,8 +373,9 @@
 (set-default 'tramp-default-proxies-alist (quote ((".*" "\\`root\\'" "/ssh:%h:"))))
 
 ;; Window margins
-(setq-default left-margin-width 2 right-margin-width 2) ; Define new widths.
+(setq-default left-margin-width 0 right-margin-width 2) ; Define new widths.
 (set-window-buffer nil (current-buffer)) ; Use them now.
+(global-display-line-numbers-mode)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
