@@ -2,8 +2,7 @@
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
-(when (not package-archive-contents)
-    (package-refresh-contents))
+
 (package-initialize)
 
 (setq package-selected-packages
@@ -26,7 +25,6 @@
         swift-mode
         geiser
         alchemist
-        elixir-mode
 	js2-mode
 	js2-refactor
 	xref-js2
@@ -35,7 +33,6 @@
 	flycheck
 	flyspell-correct-popup
 	magit
-	clips-mode
 	multi-term
 	typescript-mode
 	ts-comint
@@ -112,8 +109,15 @@
               mac-option-modifier nil
               mac-command-key-is-meta t))
 
+    )
+  (if (eq system-type 'windows-nt)
+      (progn
+	;; Cygwin
+	(setenv "PATH" (concat "c:/cygwin/bin;" (getenv "PATH")))
+	(setq exec-path (cons "c:/cygwin/bin/" exec-path))
+	(require 'cygwin-mount)
+	(cygwin-mount-activate))
     ))
-  
 
 ;; Colors in shell
 (ansi-color-for-comint-mode-on)
@@ -160,6 +164,12 @@
     (interactive);; "Prompt\n term name:")
     (let ((shell-name (read-string "term name: " nil)))
     (ansi-term "bash" shell-name)))
+
+(defun create-cygwin ()
+  "Run cygwin bash in shell mode."
+  (interactive)
+  (let ((explicit-shell-file-name "C:/cygwin/bin/bash"))
+    (call-interactively 'shell)))
 
 ;; Autocomplete settings
 (require 'auto-complete)
@@ -234,15 +244,6 @@
 (add-hook 'geiser-mode-hook 'add-pretty-lambda)
 (global-prettify-symbols-mode 1)
 
-;; Haskell section
-;; Now in haskell-mode in Melpa.
-;; C-c C-l haskell-load-file
-;; C-c C-b switch-to-haskell
-;; On Linux
-;; Install Intero
-(package-install 'intero)
-(add-hook 'haskell-mode-hook 'intero-mode)
-
 ;; Lisp section. 
 ;; Install Quicklisp:
 ;; sbcl --load quicklisp.lisp
@@ -255,11 +256,12 @@
 ;; C-c C-k to compile and load file
 ;; C-c C-z to switch to output buffer
 (setq slime-lisp-implementations
-  `((sbcl ("/usr/local/Cellar/sbcl/1.4.14/bin/sbcl"))
+  `((sbcl ("~/sbcl/bin/sbcl"))
    (clozure ("~/ccl/scripts/ccl -K utf-8"))
    (clisp ("/usr/bin/clisp" "-q -I"))))
 (load (expand-file-name "~/quicklisp/slime-helper.el"))
 (setq inferior-lisp-program "sbcl")
+(setq slime-contribs '(slime-fancy slime-asdf hippie-expand-slime))
 (setq slime-default-lisp 'sbcl)
 (setq show-paren-delay 0)
 (show-paren-mode 1)
@@ -348,51 +350,16 @@
 ;; Place a .aff and a .dic in "$HOME/Library/Spelling" for each language.
 ;; https://github.com/wooorm/dictionaries/tree/master/dictionaries
 (setq ispell-program-name "hunspell")
-(setq ispell-dictionary "da_DK")
-(global-set-key (kbd "C-c D")
-          (lambda ()
-            (interactive)
-            (ispell-change-dictionary "da_DK")
-            (flyspell-buffer)))
-
-(global-set-key (kbd "C-c E")
-          (lambda ()
-            (interactive)
-            (ispell-change-dictionary "en_US")
-            (flyspell-buffer)))
-;; Tell ispell-mode to use hunspell.
+(setq ispell-local-dictionary "da_DK")
+(setq ispell-local-dictionary-alist
+      '(("da_DK" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))
+;; Tell relevant modes to use flyspell.
 (require 'flyspell)
-(add-hook 'org-mode-hook 'turn-on-flyspell)
-;;(global-flycheck-mode)
-(require 'flyspell-correct-popup)
-(define-key flyspell-mode-map (kbd "C-c O") 'flyspell-correct-previous-word-generic)
+(add-hook 'text-mode-hook 'flyspell-mode)
+(add-hook 'org-mode-hook 'flyspell-mode)
+(define-key flyspell-mode-map (kbd "\C-cc") 'flyspell-correct-wrapper)
 
 ;; Tramp
 (require 'tramp)
 (setq tramp-default-method "scp")
 (set-default 'tramp-default-proxies-alist (quote ((".*" "\\`root\\'" "/ssh:%h:"))))
-
-;; Window margins
-(setq-default left-margin-width 0 right-margin-width 2) ; Define new widths.
-(set-window-buffer nil (current-buffer)) ; Use them now.
-(global-display-line-numbers-mode)
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(column-number-mode t)
- '(display-time-mode t)
- '(package-selected-packages
-   (quote
-    (clips-mode ac-alchemist geiser ruby-mode intero company exec-path-from-shell slime slime-company auto-complete erc spaceline spacemacs-theme kotlin-mode groovy-mode ivy counsel)))
- '(show-paren-mode t)
- '(tool-bar-mode nil))
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
