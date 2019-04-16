@@ -41,6 +41,9 @@
 
 (package-install-selected-packages)
 
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+(setq exec-path (append exec-path '("/usr/local/bin")))
+
 (defun install-packages ()
   "Install all required packages."
   (interactive)
@@ -107,17 +110,8 @@
         (setq default-input-method "MacOSX")
         (setq mac-command-modifier 'meta
               mac-option-modifier nil
-              mac-command-key-is-meta t))
+              mac-command-key-is-meta t))))
 
-    )
-  (if (eq system-type 'windows-nt)
-      (progn
-	;; Cygwin
-	(setenv "PATH" (concat "c:/cygwin/bin;" (getenv "PATH")))
-	(setq exec-path (cons "c:/cygwin/bin/" exec-path))
-	(require 'cygwin-mount)
-	(cygwin-mount-activate))
-    ))
 
 ;; Colors in shell
 (ansi-color-for-comint-mode-on)
@@ -164,12 +158,6 @@
     (interactive);; "Prompt\n term name:")
     (let ((shell-name (read-string "term name: " nil)))
     (ansi-term "bash" shell-name)))
-
-(defun create-cygwin ()
-  "Run cygwin bash in shell mode."
-  (interactive)
-  (let ((explicit-shell-file-name "C:/cygwin/bin/bash"))
-    (call-interactively 'shell)))
 
 ;; Autocomplete settings
 (require 'auto-complete)
@@ -244,24 +232,17 @@
 (add-hook 'geiser-mode-hook 'add-pretty-lambda)
 (global-prettify-symbols-mode 1)
 
-;; Lisp section. 
-;; Install Quicklisp:
-;; sbcl --load quicklisp.lisp
-;; (quicklisp-quickstart:install)
-;; (ql:add-to-init-file)
-;; Install Slime using Quicklisp:
-;; (ql:quickload "quicklisp-slime-helper")
+;; Lisp section.
+;; brew install roswell
+;; ros install sbcl
+;; ros install slime
 ;; M-x slime to connect
 ;; C-c C-c to compile defun
 ;; C-c C-k to compile and load file
 ;; C-c C-z to switch to output buffer
-(setq slime-lisp-implementations
-  `((sbcl ("~/sbcl/bin/sbcl"))
-   (clozure ("~/ccl/scripts/ccl -K utf-8"))
-   (clisp ("/usr/bin/clisp" "-q -I"))))
-(load (expand-file-name "~/quicklisp/slime-helper.el"))
-(setq inferior-lisp-program "sbcl")
-(setq slime-contribs '(slime-fancy slime-asdf hippie-expand-slime))
+(load (expand-file-name "~/.roswell/helper.el"))
+(setq inferior-lisp-program "ros -Q run")
+(setq slime-contribs '(slime-fancy slime-asdf))
 (setq slime-default-lisp 'sbcl)
 (setq show-paren-delay 0)
 (show-paren-mode 1)
