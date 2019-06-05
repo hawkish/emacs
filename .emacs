@@ -240,12 +240,10 @@
 ;; C-c C-c to compile defun
 ;; C-c C-k to compile and load file
 ;; C-c C-z to switch to output buffer
-(push 'slime-repl-ansi-color slime-contribs)
 (slime-setup)
 
 (load (expand-file-name "~/.roswell/helper.el"))
 (setq inferior-lisp-program "ros -Q run")
-(setq slime-contribs '(slime-fancy slime-asdf slime-repl-ansi-color))
 (setq slime-default-lisp 'sbcl)
 (setq show-paren-delay 0)
 (show-paren-mode 1)
