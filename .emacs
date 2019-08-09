@@ -20,7 +20,6 @@
         groovy-mode
         ivy
         counsel
-        auctex
         yaml-mode
         swift-mode
         geiser
@@ -234,6 +233,7 @@
 
 ;; Lisp section.
 ;; brew install roswell
+;; brew install zlib
 ;; ros install sbcl
 ;; ros install slime
 ;; M-x slime to connect
@@ -244,6 +244,7 @@
 
 (load (expand-file-name "~/.roswell/helper.el"))
 (setq inferior-lisp-program "ros -Q run")
+(setq slime-contribs '(slime-fancy slime-asdf))
 (setq slime-default-lisp 'sbcl)
 (setq show-paren-delay 0)
 (show-paren-mode 1)
