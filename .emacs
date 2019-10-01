@@ -236,6 +236,8 @@
 (global-prettify-symbols-mode 1)
 
 ;; Lean section.
+;; https://github.com/leanprover/lean-mode
+;; C-c C-x execute lean in stand-alone mode
 (global-set-key (kbd "S-SPC") #'company-complete)
 (add-to-list 'load-path "~/lean-3.4.2-darwin/")
 (require 'company-lean)
