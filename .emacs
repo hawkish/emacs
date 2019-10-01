@@ -237,7 +237,7 @@
 
 ;; Lean section.
 (global-set-key (kbd "S-SPC") #'company-complete)
-(add-to-load-path "~/lean-3.4.2-darwin/")
+(add-to-list 'load-path "~/lean-3.4.2-darwin/")
 (require 'company-lean)
 (require 'helm-lean)
 
