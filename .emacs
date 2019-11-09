@@ -16,7 +16,6 @@
         erc
         spaceline
         spacemacs-theme
-        zenburn-theme
         kotlin-mode
         groovy-mode
         ivy
@@ -57,8 +56,7 @@
 (install-packages)
 
 ;; load spacemacs theme
-;;(load-theme 'spacemacs-dark t)
-(load-theme 'zenburn t)
+(load-theme 'spacemacs-dark t)
 
 ;; Ivy mode
 (ivy-mode 1)
