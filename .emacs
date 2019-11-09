@@ -8,16 +8,14 @@
 (setq package-selected-packages
       '(
         company
-	company-lean
-	lean-mode
-	helm-lean
+        company-lean
         exec-path-from-shell
         slime
         slime-company
         auto-complete
         erc
         spaceline
-	spacemacs-theme
+        spacemacs-theme
         zenburn-theme
         kotlin-mode
         groovy-mode
@@ -26,21 +24,21 @@
         auctex
         yaml-mode
         swift-mode
-        geiser
         alchemist
-	js2-mode
-	js2-refactor
-	xref-js2
-	rjsx-mode
-	org
-	flycheck
-	flyspell-correct-popup
-	magit
-	multi-term
-	typescript-mode
-	ts-comint
-	tide
-        ))
+        js2-mode
+        js2-refactor
+        xref-js2
+        rjsx-mode
+        org
+        flycheck
+        flyspell-correct-popup
+        magit
+        multi-term
+        typescript-mode
+        ts-comint
+        tide
+        slime-docker
+	docker-tramp))
 
 (package-install-selected-packages)
 
@@ -84,11 +82,11 @@
   ;; Do things after Emacs package initialization
   (when (eq system-type 'gnu/linux)
       (progn
-	;; For the exec-path-from-shell needed for Mac OS to read .profile
-	;; https://github.com/purcell/exec-path-from-shell
-	(require 'exec-path-from-shell)
+        ;; For the exec-path-from-shell needed for Mac OS to read .profile
+        ;; https://github.com/purcell/exec-path-from-shell
+        (require 'exec-path-from-shell)
         (exec-path-from-shell-copy-env "SBCL_HOME")
-	(exec-path-from-shell-initialize)
+        (exec-path-from-shell-initialize)
         ;; Monaco needs to be installed first.
         ;; https://gist.github.com/rogerleite/99819
         ;; wget http://www.gringod.com/wp-upload/software/Fonts/Monaco_Linux.ttf
@@ -98,13 +96,13 @@
       )
   (when (eq system-type 'darwin)
       (progn
-	;; For the exec-path-from-shell needed for Mac OS to read .profile
-	;; https://github.com/purcell/exec-path-from-shell
-	(require 'exec-path-from-shell)
+        ;; For the exec-path-from-shell needed for Mac OS to read .profile
+        ;; https://github.com/purcell/exec-path-from-shell
+        (require 'exec-path-from-shell)
         (exec-path-from-shell-copy-env "LANG")
         (exec-path-from-shell-copy-env "GEM_HOME")
         (exec-path-from-shell-copy-env "SBCL_HOME")
-	(exec-path-from-shell-initialize)
+        (exec-path-from-shell-initialize)
         ;; Monaco needs to be installed first.
         ;; https://gist.github.com/rogerleite/99819
         ;; wget http://www.gringod.com/wp-upload/software/Fonts/Monaco_Linux.ttf
@@ -180,7 +178,7 @@
 ;; Check channels
 (erc-track-mode t)
 (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
-				"324" "329" "332" "333" "353" "477"))
+                                "324" "329" "332" "333" "353" "477"))
 ;; Don't show any of this
 (setq erc-hide-list '("JOIN" "PART" "QUIT" "NICK"))
 ;; Nick added. 
@@ -188,8 +186,8 @@
 (setq erc-nick "grayling_")
 ;; Fix size of window.
 (add-hook 'window-configuration-change-hook 
-	   '(lambda ()
-	      (setq erc-fill-column (- (window-width) 2))))
+           '(lambda ()
+              (setq erc-fill-column (- (window-width) 2))))
 
 ;; UTF-8 magic in OSX, Windows and Linux.
 (setq utf-translate-cjk-mode nil) ; disable CJK coding/encoding (Chinese/Japanese/Korean characters)
@@ -244,18 +242,16 @@
 (require 'helm-lean)
 
 ;; Lisp section.
-;; brew install roswell
-;; ros install sbcl
-;; ros install slime
-;; M-x slime to connect
+;; docker run --rm -it -v /Users/mortenhogh/Documents/git/common-lisp:/usr/local/share/common-lisp/source daewok/lisp-devel:base sbcl
+;; M-x slime-docker to connect
 ;; C-c C-c to compile defun
 ;; C-c C-k to compile and load file
 ;; C-c C-z to switch to output buffer
-(slime-setup)
+;; Do some standard SLIME configuration.
+(slime-setup '(slime-fancy slime-tramp))
+;; Set the default lisp you want to use (here it's SBCL).
+(setq inferior-lisp-program "sbcl")
 
-(load (expand-file-name "~/.roswell/helper.el"))
-(setq inferior-lisp-program "ros -Q run")
-(setq slime-contribs '(slime-fancy slime-asdf))
 ;;(setq slime-default-lisp 'sbcl)
 (setq show-paren-delay 0)
 (show-paren-mode 1)
