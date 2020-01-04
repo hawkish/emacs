@@ -50,7 +50,9 @@
         tide
         slime-docker
 	docker-tramp
-	cider))
+	;; Clojure
+	cider
+	paredit))
 
 (package-install-selected-packages)
 
@@ -177,9 +179,8 @@
 (require 'auto-complete-config)
 (ac-config-default)
 
-;; Adding to ruby-mode
-(add-to-list 'auto-mode-alist '("Fastfile$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Podfile$" . ruby-mode))
+(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
+(add-hook 'clojure-mode-hook       #'enable-paredit-mode)
 
 ;; Magit
 (global-set-key (kbd "C-x g") 'magit-status)
