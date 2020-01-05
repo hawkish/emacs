@@ -51,8 +51,7 @@
         slime-docker
 	docker-tramp
 	;; Clojure
-	cider
-	paredit))
+	cider))
 
 (package-install-selected-packages)
 
