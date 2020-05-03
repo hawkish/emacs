@@ -48,10 +48,7 @@
         typescript-mode
         ts-comint
         tide
-        slime-docker
-	docker-tramp
-	;; Clojure
-	cider))
+	))
 
 (package-install-selected-packages)
 
@@ -125,6 +122,8 @@
               mac-option-modifier nil
               mac-command-key-is-meta t))))
 
+
+(load (expand-file-name "~/.roswell/helper.el"))
 
 ;; Colors in shell
 (ansi-color-for-comint-mode-on)
@@ -244,24 +243,15 @@
 (add-hook 'geiser-mode-hook 'add-pretty-lambda)
 (global-prettify-symbols-mode 1)
 
-;; Lean section.
-;; https://github.com/leanprover/lean-mode
-;; C-c C-x execute lean in stand-alone mode
-(global-set-key (kbd "S-SPC") #'company-complete)
-(add-to-list 'load-path "~/lean-3.4.2-darwin/")
-(require 'company-lean)
-(require 'helm-lean)
-
 ;; Lisp section.
-;; docker run --rm -it -v /Users/mortenhogh/Documents/git/common-lisp:/usr/local/share/common-lisp/source daewok/lisp-devel:base sbcl
-;; M-x slime-docker to connect
+;; M-x slime to connect
 ;; C-c C-c to compile defun
 ;; C-c C-k to compile and load file
 ;; C-c C-z to switch to output buffer
 ;; Do some standard SLIME configuration.
 (slime-setup '(slime-fancy slime-tramp))
 ;; Set the default lisp you want to use (here it's SBCL).
-(setq inferior-lisp-program "sbcl")
+(setq inferior-lisp-program "ros -Q run")
 
 ;;(setq slime-default-lisp 'sbcl)
 (setq show-paren-delay 0)
