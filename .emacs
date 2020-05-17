@@ -28,7 +28,8 @@
         auto-complete
         erc
         spaceline
-        spacemacs-theme
+        ;;spacemacs-theme
+	vscdark-theme
         kotlin-mode
         groovy-mode
         ivy
@@ -55,6 +56,14 @@
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setq exec-path (append exec-path '("/usr/local/bin")))
 
+;; Display line numbers with a small margin.
+(global-display-line-numbers-mode)
+(setq-default left-margin-width 2 right-margin-width 2)
+(set-window-buffer nil (current-buffer))
+
+;; Line spacing
+(setq-default line-spacing 0.3)
+
 (defun install-packages ()
   "Install all required packages."
   (interactive)
@@ -66,8 +75,9 @@
 
 (install-packages)
 
-;; load spacemacs theme
-(load-theme 'spacemacs-dark t)
+;; load theme
+;;(load-theme 'spacemacs-dark t)
+(load-theme 'vscdark t)
 
 ;; Ivy mode
 (ivy-mode 1)
@@ -94,7 +104,6 @@
         ;; For the exec-path-from-shell needed for Mac OS to read .profile
         ;; https://github.com/purcell/exec-path-from-shell
         (require 'exec-path-from-shell)
-        (exec-path-from-shell-copy-env "SBCL_HOME")
         (exec-path-from-shell-initialize)
         ;; Monaco needs to be installed first.
         ;; https://gist.github.com/rogerleite/99819
@@ -110,7 +119,6 @@
         (require 'exec-path-from-shell)
         (exec-path-from-shell-copy-env "LANG")
         (exec-path-from-shell-copy-env "GEM_HOME")
-        (exec-path-from-shell-copy-env "SBCL_HOME")
         (exec-path-from-shell-initialize)
         ;; Monaco needs to be installed first.
         ;; https://gist.github.com/rogerleite/99819
@@ -251,9 +259,9 @@
 ;; Do some standard SLIME configuration.
 (slime-setup '(slime-fancy slime-tramp))
 ;; Set the default lisp you want to use (here it's SBCL).
+(load (expand-file-name "~/.roswell/lisp/quicklisp/slime-helper.el"))
+;; Replace "sbcl" with the path to your implementation
 (setq inferior-lisp-program "ros -Q run")
-
-;;(setq slime-default-lisp 'sbcl)
 (setq show-paren-delay 0)
 (show-paren-mode 1)
 (add-hook 'lisp-mode-hook
@@ -365,7 +373,8 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (company company-lean helm-lean exec-path-from-shell slime slime-company auto-complete erc spaceline spacemacs-theme kotlin-mode groovy-mode ivy counsel yaml-mode swift-mode alchemist js2-mode js2-refactor xref-js2 rjsx-mode org flycheck flyspell-correct-popup magit multi-term typescript-mode ts-comint tide slime-docker docker-tramp cider))))
+    (company company-lean helm-lean exec-path-from-shell slime slime-company auto-complete erc spaceline spacemacs-theme kotlin-mode groovy-mode ivy counsel yaml-mode swift-mode alchemist js2-mode js2-refactor xref-js2 rjsx-mode org flycheck flyspell-correct-popup magit multi-term typescript-mode ts-comint tide slime-docker docker-tramp cider)))
+ '(safe-local-variable-values (quote ((Syntax . Common-Lisp)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
