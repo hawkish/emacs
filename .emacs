@@ -28,8 +28,7 @@
         auto-complete
         erc
         spaceline
-        ;;spacemacs-theme
-	vscdark-theme
+	vs-dark-theme
         kotlin-mode
         groovy-mode
         ivy
@@ -76,8 +75,7 @@
 (install-packages)
 
 ;; load theme
-;;(load-theme 'spacemacs-dark t)
-(load-theme 'vscdark t)
+(load-theme 'vs-dark t)
 
 ;; Ivy mode
 (ivy-mode 1)
