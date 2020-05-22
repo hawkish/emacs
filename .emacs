@@ -48,6 +48,7 @@
         typescript-mode
         ts-comint
         tide
+	dumb-jump
 	))
 
 (package-install-selected-packages)
@@ -83,6 +84,11 @@
 (global-set-key "\C-s" 'swiper)
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+
+;; Use dumb-jump
+;; dumb-jump-go C-M-g
+;; dumb-jump-back C-M-p
+(dumb-jump-mode)
 
 ;; load the spaceline modeline theme
 (require 'spaceline-config)
