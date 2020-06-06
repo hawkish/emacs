@@ -256,6 +256,10 @@
 (global-prettify-symbols-mode 1)
 
 ;; Lisp section.
+;; Remember to:
+;; ros install slime
+;; and evaluate:
+;; (ql:quickload "quicklisp-slime-helper") 
 ;; M-x slime to connect
 ;; C-c C-c to compile defun
 ;; C-c C-k to compile and load file
