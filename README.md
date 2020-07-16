@@ -2,6 +2,22 @@
 
 Emacs is this wonderfully extensible editor. This is my configuration file for a better emacs. 
 
+## Installation
+I use the emacs mac port from https://github.com/railwaycat/homebrew-emacsmacport
+
+To install just:
+
+```shell
+brew tap railwaycat/emacsmacport
+```
+
+```shell
+brew install emacs-mac
+```
+
+```shell
+ln -s /usr/local/opt/emacs-mac/Emacs.app /Applications
+```
 
 ## Absolutely under construction
 So sorry for the mess.
