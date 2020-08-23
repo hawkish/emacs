@@ -29,8 +29,6 @@
         erc
         spaceline
 	vs-dark-theme
-        kotlin-mode
-        groovy-mode
         ivy
         counsel
         yaml-mode
@@ -49,6 +47,7 @@
         ts-comint
         tide
 	dumb-jump
+	minimap
 	))
 
 (package-install-selected-packages)
@@ -89,6 +88,9 @@
 ;; dumb-jump-go C-M-g
 ;; dumb-jump-back C-M-p
 (dumb-jump-mode)
+
+;; Use minimap
+(minimap-mode)
 
 ;; load the spaceline modeline theme
 (require 'spaceline-config)
@@ -379,9 +381,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(minimap-window-location (quote right))
  '(package-selected-packages
    (quote
-    (company company-lean helm-lean exec-path-from-shell slime slime-company auto-complete erc spaceline spacemacs-theme kotlin-mode groovy-mode ivy counsel yaml-mode swift-mode alchemist js2-mode js2-refactor xref-js2 rjsx-mode org flycheck flyspell-correct-popup magit multi-term typescript-mode ts-comint tide slime-docker docker-tramp cider)))
+    (minimap company company-lean helm-lean exec-path-from-shell slime slime-company auto-complete erc spaceline spacemacs-theme kotlin-mode groovy-mode ivy counsel yaml-mode swift-mode alchemist js2-mode js2-refactor xref-js2 rjsx-mode org flycheck flyspell-correct-popup magit multi-term typescript-mode ts-comint tide slime-docker docker-tramp cider)))
  '(safe-local-variable-values (quote ((Syntax . Common-Lisp)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
