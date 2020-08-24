@@ -90,7 +90,7 @@
 (dumb-jump-mode)
 
 ;; Use minimap
-(global-set-key "\C-m" 'minimap-mode)
+(global-set-key "\C-n" 'minimap-mode)
 
 ;; load the spaceline modeline theme
 (require 'spaceline-config)
