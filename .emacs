@@ -23,8 +23,9 @@
         company-lean
 	helm-lean
         exec-path-from-shell
-        slime
-        slime-company
+        ;;slime
+        ;;slime-company
+	sly
         auto-complete
         erc
         spaceline
@@ -137,7 +138,7 @@
               mac-command-key-is-meta t))))
 
 
-(load (expand-file-name "~/.roswell/helper.el"))
+;; (load (expand-file-name "~/.roswell/helper.el"))
 
 ;; Colors in shell
 (ansi-color-for-comint-mode-on)
@@ -267,16 +268,16 @@
 ;; C-c C-k to compile and load file
 ;; C-c C-z to switch to output buffer
 ;; Do some standard SLIME configuration.
-(slime-setup '(slime-fancy slime-tramp))
+;;(slime-setup '(slime-fancy slime-tramp))
 ;; Set the default lisp you want to use (here it's SBCL).
-(load (expand-file-name "~/.roswell/lisp/quicklisp/slime-helper.el"))
+;;(load (expand-file-name "~/.roswell/lisp/quicklisp/slime-helper.el"))
 ;; Replace "sbcl" with the path to your implementation
 (setq inferior-lisp-program "ros -Q run")
-(setq show-paren-delay 0)
-(show-paren-mode 1)
-(add-hook 'lisp-mode-hook
-          (lambda ()
-            (local-set-key "\C-cp" 'slime-close-all-parens-in-sexp)))
+;;(setq show-paren-delay 0)
+;;(show-paren-mode 1)
+;;(add-hook 'lisp-mode-hook
+;;          (lambda ()
+;;            (local-set-key "\C-cp" 'slime-close-all-parens-in-sexp)))
 
 
 ;; Racket section.
@@ -382,9 +383,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(minimap-window-location (quote right))
- '(package-selected-packages
-   (quote
-    (minimap company company-lean helm-lean exec-path-from-shell slime slime-company auto-complete erc spaceline spacemacs-theme kotlin-mode groovy-mode ivy counsel yaml-mode swift-mode alchemist js2-mode js2-refactor xref-js2 rjsx-mode org flycheck flyspell-correct-popup magit multi-term typescript-mode ts-comint tide slime-docker docker-tramp cider)))
  '(safe-local-variable-values (quote ((Syntax . Common-Lisp)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
