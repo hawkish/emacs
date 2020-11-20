@@ -48,10 +48,10 @@
 (use-package multi-term)'
 (use-package tide)
 (use-package dumb-jump
-  :ensure t)
+  :ensure t
+  :config
+  (dumb-jump-mode 1))
 (use-package minimap)
-
-(dumb-jump-mode)
 
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setq exec-path (append exec-path '("/usr/local/bin")))
