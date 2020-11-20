@@ -16,50 +16,60 @@
 (setq use-package-always-ensure t)
 
 (use-package company)
-(use-package company-lean)
-(use-package helm-lean)
+
 (use-package exec-path-from-shell
   :ensure t
   :init
   (exec-path-from-shell-initialize))
+
 (use-package sly)
+
 (use-package highlight-parentheses
   :ensure t
   :diminish highlight-parentheses-mode
   :commands highlight-parentheses-mode)
+
 (use-package auto-complete
   :ensure t
   :diminish auto-complete-mode
   :config
   (require 'auto-complete-config)
   (ac-config-default))
+
 (use-package markdown-mode
   :ensure t
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
-(use-package erc)
-;; spaceline configuration
+
 (use-package spaceline
   :ensure t
   :config
   (setq-default mode-line-format '("%e" (:eval (spaceline-ml-main)))))
+
 (use-package spaceline-config
   :ensure spaceline
   :config
   (spaceline-helm-mode 1)
   (spaceline-emacs-theme))
+
 (use-package vscode-dark-plus-theme
   :config
   (load-theme 'vscode-dark-plus t))
+
 (use-package ivy)
+
 (use-package counsel)
+
 (use-package yaml-mode)
-(use-package alchemist)
+
 (use-package org)
+
 (use-package flycheck)
+
 (use-package flyspell-correct-popup)
+
 (use-package js2-mode
   :ensure t
   :defer t
@@ -69,12 +79,12 @@
     :defer t
     :config
     (add-hook 'js2-mode-hook 'ac-js2-mode)))
+
 (use-package magit
   :defer t
   :ensure t
   :bind ("C-x g" . magit-status))
-(use-package multi-term)'
-(use-package tide)
+
 (use-package dumb-jump
   :ensure t
   :bind (("M-g o" . dumb-jump-go-other-window)
@@ -85,6 +95,7 @@
          ("M-g z" . dumb-jump-go-prefer-external-other-window)) 
   :init (dumb-jump-mode)
   :config (setq dumb-jump-selector 'ivy))
+
 (use-package minimap
   :ensure t
   :bind (("\C-n" . minimap-mode)))
@@ -202,37 +213,6 @@
 (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
 (add-hook 'clojure-mode-hook       #'enable-paredit-mode)
 
-;; Magit
-(global-set-key (kbd "C-x g") 'magit-status)
-
-;; ERC setup
-(require 'erc)
-;; Check channels
-(erc-track-mode t)
-(setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
-                                "324" "329" "332" "333" "353" "477"))
-;; Don't show any of this
-(setq erc-hide-list '("JOIN" "PART" "QUIT" "NICK"))
-;; Nick added. 
-(setq erc-prompt-for-nickserv-password t)
-(setq erc-nick "grayling_")
-;; Fix size of window.
-(add-hook 'window-configuration-change-hook 
-           '(lambda ()
-              (setq erc-fill-column (- (window-width) 2))))
-
-;; UTF-8 magic in OSX, Windows and Linux.
-(setq utf-translate-cjk-mode nil) ; disable CJK coding/encoding (Chinese/Japanese/Korean characters)
-(set-language-environment 'utf-8)
-(set-keyboard-coding-system 'utf-8-mac) ; For old Carbon emacs on OS X only
-(setq locale-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(unless (eq system-type 'windows-nt)
-  (set-selection-coding-system 'utf-8))
-(prefer-coding-system 'utf-8)
-(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
-
 ;; Disable tool-bar
 (if window-system
     (tool-bar-mode -1)
@@ -286,14 +266,6 @@
 ;;          (lambda ()
 ;;            (local-set-key "\C-cp" 'slime-close-all-parens-in-sexp)))
 
-
-;; Racket section.
-;; C-c C-k to compile and load file
-;; C-c C-a to jump to REPL and switch module
-;; Selecting racket as default implementation of Scheme.
-(add-hook 'scheme-mode-hook 'geiser-mode)
-(setq geiser-active-implementations '(racket))
-
 ;; Prolog
 (autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)
 (autoload 'prolog-mode "prolog" "Major mode for editing Prolog programs." t)
@@ -302,33 +274,6 @@
 (setq auto-mode-alist (append '(("\\.pl$" . prolog-mode)
                                 ("\\.m$" . mercury-mode))
 			      auto-mode-alist))
-
-;; Typescript mode
-(require 'ansi-color)
-(defun colorize-compilation-buffer ()
-  (ansi-color-apply-on-region compilation-filter-start (point-max)))
-(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
-
-;; Tide mode
-(defun setup-tide-mode ()
-  (interactive)
-  (tide-setup)
-  (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (eldoc-mode +1)
-  (tide-hl-identifier-mode +1)
-  ;; company is an optional dependency. You have to
-  ;; install it separately via package-install
-  ;; `M-x package-install [ret] company`
-  (company-mode +1))
-
-;; aligns annotation to the right hand side
-(setq company-tooltip-align-annotations t)
-
-;; formats the buffer before saving
-(add-hook 'before-save-hook 'tide-format-before-save)
-
-(add-hook 'typescript-mode-hook #'setup-tide-mode)
 
 ;; Org mode
 (require 'org)
