@@ -22,7 +22,9 @@
   :init
   (exec-path-from-shell-initialize))
 
-(use-package sly)
+(use-package sly
+  :ensure t
+  :bind (("C-<up>" . comint-previous-input)))
 
 (use-package highlight-parentheses
   :ensure t
@@ -146,7 +148,6 @@
         ;; https://github.com/purcell/exec-path-from-shell
         (require 'exec-path-from-shell)
         (exec-path-from-shell-copy-env "LANG")
-        (exec-path-from-shell-copy-env "GEM_HOME")
         (exec-path-from-shell-initialize)
         ;; Monaco needs to be installed first.
         ;; https://gist.github.com/rogerleite/99819
@@ -169,7 +170,7 @@
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 
-;;  Avoid the annoying startup message.
+;; Avoid the annoying startup message.
 (setq inhibit-startup-message t)
 
 ;; Enable auto revert mode. So I don't have to.
@@ -307,13 +308,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(minimap-window-location 'right)
- '(package-selected-packages
-   '(sly yaml-mode xref-js2 vs-dark-theme use-package ts-comint tide swift-mode spaceline slime-company rjsx-mode multi-term minimap magit kotlin-mode js2-refactor helm-lean groovy-mode flyspell-correct-popup exec-path-from-shell dumb-jump counsel company-lean auto-complete alchemist))
- '(safe-local-variable-values '((Syntax . Common-Lisp))))
+ '(minimap-window-location (quote right))
+ '(safe-local-variable-values (quote ((Syntax . Common-Lisp)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((((class color) (min-colors 89)) (:background "#1e1e1e" :foreground "#d4d4d4")))))
