@@ -1,10 +1,8 @@
 ;; Package archives
 (require 'package)
-
+(package-initialize)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
-
-(package-initialize)
 
 ;; Bootstrap 'use-package'
 (eval-after-load 'gnutls
@@ -17,41 +15,43 @@
 (require 'bind-key)
 (setq use-package-always-ensure t)
 
-(setq package-selected-packages
-      '(
-        company
-        company-lean
-	helm-lean
-        exec-path-from-shell
-        ;;slime
-        ;;slime-company
-	sly
-        auto-complete
-        erc
-        spaceline
-	vs-dark-theme
-        ivy
-        counsel
-        yaml-mode
-        swift-mode
-        alchemist
-        js2-mode
-        js2-refactor
-        xref-js2
-        rjsx-mode
-        org
-        flycheck
-        flyspell-correct-popup
-        magit
-        multi-term
-        typescript-mode
-        ts-comint
-        tide
-	dumb-jump
-	minimap
-	))
+(use-package company)
+(use-package company-lean)
+(use-package helm-lean)
+(use-package exec-path-from-shell)
+(use-package sly)
+(use-package auto-complete)
+(use-package erc)
+;; spaceline configuration
+(use-package spaceline
+  :ensure t
+  :config
+  (setq-default mode-line-format '("%e" (:eval (spaceline-ml-main)))))
+(use-package spaceline-config
+  :ensure spaceline
+  :config
+  (spaceline-helm-mode 1)
+  (spaceline-emacs-theme))
+(use-package vscode-dark-plus-theme
+  :config
+  (load-theme 'vscode-dark-plus t))
+(use-package ivy)
+(use-package counsel)
+(use-package yaml-mode)
+(use-package alchemist)
+(use-package org)
+(use-package flycheck)
+(use-package flyspell-correct-popup)
+(use-package magit
+  :ensure t
+  :bind ("C-x g" . magit-status))
+(use-package multi-term)'
+(use-package tide)
+(use-package dumb-jump
+  :ensure t)
+(use-package minimap)
 
-(package-install-selected-packages)
+(dumb-jump-mode)
 
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setq exec-path (append exec-path '("/usr/local/bin")))
@@ -75,9 +75,6 @@
 
 (install-packages)
 
-;; load theme
-(load-theme 'vs-dark t)
-
 ;; Ivy mode
 (ivy-mode 1)
 (setq ivy-use-virtual-buffers t)
@@ -85,17 +82,8 @@
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 
-;; Use dumb-jump
-;; dumb-jump-go C-M-g
-;; dumb-jump-back C-M-p
-(dumb-jump-mode)
-
 ;; Use minimap
 (global-set-key "\C-n" 'minimap-mode)
-
-;; load the spaceline modeline theme
-(require 'spaceline-config)
-(spaceline-emacs-theme)
 
 ;; Stop the infernal bell
 (setq ring-bell-function #'ignore)
@@ -296,38 +284,11 @@
                                 ("\\.m$" . mercury-mode))
 			      auto-mode-alist))
 
-;; Javascript
-(require 'js2-mode)
-;;(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-(add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
-(require 'js2-refactor)
-(require 'xref-js2)
-(add-hook 'js2-mode-hook #'js2-refactor-mode)
-(js2r-add-keybindings-with-prefix "C-c C-r")
-(define-key js2-mode-map (kbd "C-k") #'js2r-kill)
-;; js-mode (which js2 is based on) binds "M-." which conflicts with xref, so
-;; unbind it.
-(define-key js-mode-map (kbd "M-.") nil)
-(add-hook 'js2-mode-hook (lambda ()
-			   (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
-(require 'rjsx-mode)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
-
 ;; Typescript mode
 (require 'ansi-color)
 (defun colorize-compilation-buffer ()
   (ansi-color-apply-on-region compilation-filter-start (point-max)))
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
-
-;; ts-comint
-(require 'ts-comint)
-(add-hook 'typescript-mode-hook
-          (lambda ()
-            (local-set-key (kbd "C-x C-e") 'ts-send-last-sexp)
-            (local-set-key (kbd "C-M-x") 'ts-send-last-sexp-and-go)
-            (local-set-key (kbd "C-c b") 'ts-send-buffer)
-            (local-set-key (kbd "C-c C-b") 'ts-send-buffer-and-go)
-            (local-set-key (kbd "C-c l") 'ts-load-file-and-go)))
 
 ;; Tide mode
 (defun setup-tide-mode ()
@@ -382,8 +343,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(minimap-window-location (quote right))
- '(safe-local-variable-values (quote ((Syntax . Common-Lisp)))))
+ '(minimap-window-location 'right)
+ '(package-selected-packages
+   '(sly yaml-mode xref-js2 vs-dark-theme use-package ts-comint tide swift-mode spaceline slime-company rjsx-mode multi-term minimap magit kotlin-mode js2-refactor helm-lean groovy-mode flyspell-correct-popup exec-path-from-shell dumb-jump counsel company-lean auto-complete alchemist))
+ '(safe-local-variable-values '((Syntax . Common-Lisp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
