@@ -18,9 +18,27 @@
 (use-package company)
 (use-package company-lean)
 (use-package helm-lean)
-(use-package exec-path-from-shell)
+(use-package exec-path-from-shell
+  :ensure t
+  :init
+  (exec-path-from-shell-initialize))
 (use-package sly)
-(use-package auto-complete)
+(use-package highlight-parentheses
+  :ensure t
+  :diminish highlight-parentheses-mode
+  :commands highlight-parentheses-mode)
+(use-package auto-complete
+  :ensure t
+  :diminish auto-complete-mode
+  :config
+  (require 'auto-complete-config)
+  (ac-config-default))
+(use-package markdown-mode
+  :ensure t
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
 (use-package erc)
 ;; spaceline configuration
 (use-package spaceline
@@ -42,7 +60,17 @@
 (use-package org)
 (use-package flycheck)
 (use-package flyspell-correct-popup)
+(use-package js2-mode
+  :ensure t
+  :defer t
+  :config
+  (use-package ac-js2
+    :ensure t
+    :defer t
+    :config
+    (add-hook 'js2-mode-hook 'ac-js2-mode)))
 (use-package magit
+  :defer t
   :ensure t
   :bind ("C-x g" . magit-status))
 (use-package multi-term)'
@@ -57,7 +85,9 @@
          ("M-g z" . dumb-jump-go-prefer-external-other-window)) 
   :init (dumb-jump-mode)
   :config (setq dumb-jump-selector 'ivy))
-(use-package minimap)
+(use-package minimap
+  :ensure t
+  :bind (("\C-n" . minimap-mode)))
 
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setq exec-path (append exec-path '("/usr/local/bin")))
@@ -70,26 +100,12 @@
 ;; Line spacing
 (setq-default line-spacing 0.3)
 
-(defun install-packages ()
-  "Install all required packages."
-  (interactive)
-  (unless package-archive-contents
-    (package-refresh-contents))
-  (dolist (package package-selected-packages)
-    (unless (package-installed-p package)
-      (package-install package))))
-
-(install-packages)
-
 ;; Ivy mode
 (ivy-mode 1)
 (setq ivy-use-virtual-buffers t)
 (global-set-key "\C-s" 'swiper)
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-
-;; Use minimap
-(global-set-key "\C-n" 'minimap-mode)
 
 ;; Stop the infernal bell
 (setq ring-bell-function #'ignore)
@@ -130,9 +146,6 @@
         (setq mac-command-modifier 'meta
               mac-option-modifier nil
               mac-command-key-is-meta t))))
-
-
-;; (load (expand-file-name "~/.roswell/helper.el"))
 
 ;; Colors in shell
 (ansi-color-for-comint-mode-on)
