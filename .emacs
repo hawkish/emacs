@@ -72,6 +72,8 @@
 
 (use-package flyspell-correct-popup)
 
+(use-package multi-term)
+
 (use-package js2-mode
   :ensure t
   :defer t
@@ -308,8 +310,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(minimap-window-location (quote right))
- '(safe-local-variable-values (quote ((Syntax . Common-Lisp)))))
+ '(minimap-window-location 'right)
+ '(package-selected-packages
+   '(multi-term yaml-mode vscode-dark-plus-theme use-package spaceline sly minimap markdown-mode magit highlight-parentheses flyspell-correct-popup flycheck exec-path-from-shell dumb-jump counsel company auto-complete ac-js2))
+ '(safe-local-variable-values '((Syntax . Common-Lisp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
