@@ -25,10 +25,23 @@
   :ensure t
   :bind (("C-<up>" . comint-previous-input)))
 
-(use-package highlight-parentheses
+;;(use-package highlight-parentheses
+;;  :diminish highlight-parentheses-mode
+;;  :config
+;;  (setq hl-paren-colors
+;;        '("orange1" "yellow1" "greenyellow" "green1"
+;;          "springgreen1" "cyan1" "slateblue1" "magenta1" "purple"))
+;;  :hook (prog-mode . highlight-parentheses-mode))
+
+(use-package rainbow-delimiters
   :ensure t
-  :diminish highlight-parentheses-mode
-  :commands highlight-parentheses-mode)
+  :hook (lisp-mode . rainbow-delimiters-mode))
+
+(use-package highlight-symbol
+  :ensure t
+  :config
+  (setq highlight-symbol-idle-delay 0.5)
+  :hook (prog-mode . highlight-symbol-mode))
 
 (use-package auto-complete
   :ensure t
@@ -311,11 +324,11 @@
  ;; If there is more than one, they won't work right.
  '(minimap-window-location 'right)
  '(package-selected-packages
-   '(multi-term yaml-mode vscode-dark-plus-theme use-package spaceline sly minimap markdown-mode magit highlight-parentheses flyspell-correct-popup flycheck exec-path-from-shell dumb-jump counsel company auto-complete ac-js2))
+   '(highlight-symbol rainbow-delimiters multi-term yaml-mode vscode-dark-plus-theme use-package spaceline sly minimap markdown-mode magit highlight-parentheses flyspell-correct-popup flycheck exec-path-from-shell dumb-jump counsel company auto-complete ac-js2))
  '(safe-local-variable-values '((Syntax . Common-Lisp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((((class color) (min-colors 89)) (:background "#1e1e1e" :foreground "#d4d4d4")))))
+ '(default ((((class color) (min-colors 89)) (:background "#1e1e1e" :foreground "#d4d4d4" :family "Menlo" :foundry "nil" :slant normal :weight normal :height 120 :width normal)))))
