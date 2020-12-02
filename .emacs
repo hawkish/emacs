@@ -25,6 +25,11 @@
   :ensure t
   :bind (("C-<up>" . comint-previous-input)))
 
+(use-package highlight-parentheses
+  :ensure t
+  :diminish highlight-parentheses-mode
+  :commands highlight-parentheses-mode)
+
 ;;(use-package highlight-parentheses
 ;;  :diminish highlight-parentheses-mode
 ;;  :config
@@ -35,7 +40,10 @@
 
 (use-package rainbow-delimiters
   :ensure t
-  :hook (lisp-mode . rainbow-delimiters-mode))
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+(setq show-paren-delay 0)
+(show-paren-mode 1)
 
 (use-package highlight-symbol
   :ensure t
