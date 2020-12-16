@@ -14,12 +14,23 @@
   (require 'use-package))
 (require 'package)
 
-(use-package company)
+(use-package company
+  :ensure t)
 
 (use-package exec-path-from-shell
   :ensure t
   :init
   (exec-path-from-shell-initialize))
+
+(use-package cobol-mode
+  :ensure t
+  :init
+  (setq auto-mode-alist
+      (append
+       '(("\\.cob\\'" . cobol-mode)
+         ("\\.cbl\\'" . cobol-mode)
+         ("\\.cpy\\'" . cobol-mode))
+       auto-mode-alist)))
 
 (use-package sly
   :ensure t
