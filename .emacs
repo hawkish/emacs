@@ -122,12 +122,12 @@
 
 (use-package dumb-jump
   :ensure t
-  :bind (("M-g o" . dumb-jump-go-other-window)
-         ("M-g j" . dumb-jump-go)
-         ("M-g b" . dumb-jump-back)
-         ("M-g q" . dumb-jump-quick-look)
-         ("M-g x" . dumb-jump-go-prefer-external)
-         ("M-g z" . dumb-jump-go-prefer-external-other-window)) 
+  :bind (("C-x o" . dumb-jump-go-other-window)
+         ("C-x j" . dumb-jump-go)
+         ("C-x b" . dumb-jump-back)
+         ("C-x q" . dumb-jump-quick-look)
+         ("C-x x" . dumb-jump-go-prefer-external)
+         ("C-x z" . dumb-jump-go-prefer-external-other-window)) 
   :init (dumb-jump-mode)
   :config (setq dumb-jump-selector 'ivy))
 
