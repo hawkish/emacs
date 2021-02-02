@@ -88,22 +88,30 @@
   (spaceline-emacs-theme))
 
 (use-package vscode-dark-plus-theme
+  :ensure t
   :config
   (load-theme 'vscode-dark-plus t))
 
-(use-package ivy)
+(use-package ivy
+  :ensure t)
 
-(use-package counsel)
+(use-package counsel
+  :ensure t)
 
-(use-package yaml-mode)
+(use-package yaml-mode
+  :ensure t)
 
-(use-package org)
+(use-package org
+  :ensure t)
 
-(use-package flycheck)
+(use-package flycheck
+  :ensure t)
 
-(use-package flyspell-correct-popup)
+(use-package flyspell-correct-popup
+  :ensure t)
 
-(use-package multi-term)
+(use-package multi-term
+  :ensure t)
 
 (use-package js2-mode
   :ensure t
@@ -332,10 +340,6 @@
 (add-hook 'org-mode-hook 'flyspell-mode)
 (define-key flyspell-mode-map (kbd "\C-cc") 'flyspell-correct-wrapper)
 
-;; Tramp
-(require 'tramp)
-(setq tramp-default-method "scp")
-(set-default 'tramp-default-proxies-alist (quote ((".*" "\\`root\\'" "/ssh:%h:"))))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
