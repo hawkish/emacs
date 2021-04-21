@@ -37,6 +37,9 @@
   :bind (("C-<up>" . comint-previous-input)
 	 ("C-<down>" . comint-next-input)))
 
+(use-package geiser
+  :ensure t)
+
 (use-package highlight-parentheses
   :ensure t
   :diminish highlight-parentheses-mode
@@ -300,6 +303,13 @@
 ;;(add-hook 'lisp-mode-hook
 ;;          (lambda ()
 ;;            (local-set-key "\C-cp" 'slime-close-all-parens-in-sexp)))
+
+;; Scheme section.
+;; C-c C-k to compile and load file
+;; C-c C-a to jump to REPL and switch module
+;; Selecting racket as default implementation of Scheme.
+(add-hook 'scheme-mode-hook 'geiser-mode)
+(setq geiser-active-implementations '(racket))
 
 ;; Prolog
 (autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)
