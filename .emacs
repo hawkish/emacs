@@ -40,6 +40,9 @@
 (use-package geiser
   :ensure t)
 
+(use-package geiser-racket
+  :ensure t)
+
 (use-package highlight-parentheses
   :ensure t
   :diminish highlight-parentheses-mode
@@ -305,6 +308,7 @@
 ;;            (local-set-key "\C-cp" 'slime-close-all-parens-in-sexp)))
 
 ;; Scheme section.
+;; brew install --cask racket
 ;; C-c C-k to compile and load file
 ;; C-c C-a to jump to REPL and switch module
 ;; Selecting racket as default implementation of Scheme.
