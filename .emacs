@@ -37,10 +37,10 @@
   :bind (("C-<up>" . comint-previous-input)
 	 ("C-<down>" . comint-next-input)))
 
-(use-package geiser
+(use-package geiser-racket
   :ensure t)
 
-(use-package geiser-racket
+(use-package racket-mode
   :ensure t)
 
 (use-package highlight-parentheses
