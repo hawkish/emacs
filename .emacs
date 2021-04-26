@@ -131,7 +131,7 @@
 
 (use-package dumb-jump
   :ensure t
-  :bind (("C-x o" . dumb-jump-go-other-window)
+  :bind (("C-x w" . dumb-jump-go-other-window)
          ("C-x j" . dumb-jump-go)
          ("C-x b" . dumb-jump-back)
          ("C-x q" . dumb-jump-quick-look)
