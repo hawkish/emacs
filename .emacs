@@ -1,4 +1,6 @@
 ;; Package archives
+;; use-package requires M-x package-install <RET> use-package <RET>
+
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
@@ -40,24 +42,13 @@
   :bind (("C-<up>" . comint-previous-input)
 	 ("C-<down>" . comint-next-input)))
 
-(use-package geiser-racket
-  :ensure t)
-
-(use-package racket-mode
+(use-package geiser-chez
   :ensure t)
 
 (use-package highlight-parentheses
   :ensure t
   :diminish highlight-parentheses-mode
   :commands highlight-parentheses-mode)
-
-;;(use-package highlight-parentheses
-;;  :diminish highlight-parentheses-mode
-;;  :config
-;;  (setq hl-paren-colors
-;;        '("orange1" "yellow1" "greenyellow" "green1"
-;;          "springgreen1" "cyan1" "slateblue1" "magenta1" "purple"))
-;;  :hook (prog-mode . highlight-parentheses-mode))
 
 (use-package rainbow-delimiters
   :ensure t
@@ -98,22 +89,30 @@
   (spaceline-emacs-theme))
 
 (use-package vscode-dark-plus-theme
+  :ensure t
   :config
   (load-theme 'vscode-dark-plus t))
 
-(use-package ivy)
+(use-package ivy
+  :ensure t)
 
-(use-package counsel)
+(use-package counsel
+  :ensure t)
 
-(use-package yaml-mode)
+(use-package yaml-mode
+  :ensure t)
 
-(use-package org)
+(use-package org
+  :ensure t)
 
-(use-package flycheck)
+(use-package flycheck
+  :ensure t)
 
-(use-package flyspell-correct-popup)
+(use-package flyspell-correct-popup
+  :ensure t)
 
-(use-package multi-term)
+(use-package multi-term
+  :ensure t)
 
 (use-package js2-mode
   :ensure t
@@ -311,12 +310,15 @@
 ;;            (local-set-key "\C-cp" 'slime-close-all-parens-in-sexp)))
 
 ;; Scheme section.
+;; brew install chezscheme
 ;; brew install --cask racket
 ;; C-c C-k to compile and load file
 ;; C-c C-a to jump to REPL and switch module
-;; Selecting racket as default implementation of Scheme.
+;; Selecting scheme or racket as default implementation of Scheme.
 (add-hook 'scheme-mode-hook 'geiser-mode)
-(setq geiser-active-implementations '(racket))
+(setq geiser-active-implementations '(chez))
+;; Extra setting for scheme.
+(setq geiser-chez-binary "chez")
 
 ;; Prolog
 (autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)
