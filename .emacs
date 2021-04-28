@@ -310,10 +310,15 @@
 ;;            (local-set-key "\C-cp" 'slime-close-all-parens-in-sexp)))
 
 ;; Scheme section.
-;; brew install chezscheme
 ;; brew install --cask racket
+;; Racket shortcuts
 ;; C-c C-k to compile and load file
 ;; C-c C-a to jump to REPL and switch module
+;; ;; brew install chezscheme
+;; Chez Scheme shortcuts
+;; C-x C-e will eval the s-expression just before point.
+;; C-c C-z shortcut will bring you from REPL to the buffer. 
+;; C-c C-k to compile the file
 ;; Selecting scheme or racket as default implementation of Scheme.
 (add-hook 'scheme-mode-hook 'geiser-mode)
 (setq geiser-active-implementations '(chez))
