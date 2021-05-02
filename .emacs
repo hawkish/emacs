@@ -1,6 +1,3 @@
-;; Package archives
-;; use-package requires M-x package-install <RET> use-package <RET>
-
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
@@ -27,23 +24,10 @@
   (require 'use-package))
 (require 'package)
 
-(use-package company
-  :ensure t)
-
 (use-package exec-path-from-shell
   :ensure t
   :init
   (exec-path-from-shell-initialize))
-
-(use-package cobol-mode
-  :ensure t
-  :init
-  (setq auto-mode-alist
-      (append
-       '(("\\.cob\\'" . cobol-mode)
-         ("\\.cbl\\'" . cobol-mode)
-         ("\\.cpy\\'" . cobol-mode))
-       auto-mode-alist)))
 
 (use-package sly
   :ensure t
@@ -51,19 +35,39 @@
 	 ("C-<down>" . comint-next-input)))
 
 (use-package geiser-chez
-  :ensure t)
+  :ensure t
+  :after (paredit company)
+  :bind
+  (("C-c g r" . run-chez)
+   ("C-c g c" . geiser-connect))
+  :hook
+  (geiser-mode . company-mode)
+  (geiser-repl-mode . paredit-mode))
 
 (use-package paredit
   :ensure t
   :config
-  (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
+  :hook
+  (emacs-lisp-mode . paredit-mode)
   ;; enable in the *scratch* buffer
-  (add-hook 'lisp-interaction-mode-hook #'paredit-mode)
-  (add-hook 'ielm-mode-hook #'paredit-mode)
-  (add-hook 'lisp-mode-hook #'paredit-mode)
-  (add-hook 'scheme-mode-hook #'paredit-mode)
-  (add-hook 'racket-mode-hook #'paredit-mode)
-  (add-hook 'eval-expression-minibuffer-setup-hook #'paredit-mode))
+  (lisp-interaction-mode . paredit-mode)
+  (ielm-mode . paredit-mode)
+  (lisp-mode . paredit-mode)
+  (scheme-mode . paredit-mode)
+  (racket-mode . paredit-mode)
+  (eval-expression-minibuffer-setup . paredit-mode)
+  :init (show-paren-mode))
+
+(use-package company
+  :demand t
+  :bind
+  (("TAB" . company-indent-or-complete-common))
+  :custom
+  (company-idle-delay 0)
+  (company-minimum-prefix-length 1)
+  (company-selection-wrap-around t)
+  :config
+  (company-tng-configure-default))
 
 (use-package highlight-parentheses
   :ensure t
