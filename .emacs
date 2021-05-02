@@ -343,6 +343,7 @@
 ;; C-x C-e will eval the s-expression just before point.
 ;; C-c C-z shortcut will bring you from REPL to the buffer. 
 ;; C-c C-k to compile the file
+;; C-j for new line in REPL
 ;; Selecting scheme or racket as default implementation of Scheme.
 (add-hook 'scheme-mode-hook 'geiser-mode)
 (setq geiser-active-implementations '(chez))
