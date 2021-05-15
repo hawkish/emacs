@@ -51,6 +51,10 @@
   (geiser-mode . company-mode)
   (geiser-repl-mode . paredit-mode))
 
+;; C-M-f and C-M-b for navigating
+;; C-M-left Slurp Backward
+;; C-M-Right Barf Backward
+;; https://calva.io/paredit/#what-is-paredit 
 (use-package paredit
   :ensure t
   :config
@@ -62,8 +66,7 @@
   (lisp-mode . paredit-mode)
   (scheme-mode . paredit-mode)
   (racket-mode . paredit-mode)
-  (eval-expression-minibuffer-setup . paredit-mode)
-  :init (show-paren-mode))
+  (eval-expression-minibuffer-setup . paredit-mode))
 
 (use-package company
   :demand t
