@@ -36,13 +36,10 @@
 
 (use-package geiser-chez
   :ensure t
-  :after (paredit company)
+  :after (paredit)
   :bind
   (("C-c g r" . run-chez)
-   ("C-c g c" . geiser-connect))
-  :hook
-  (geiser-mode . company-mode)
-  (geiser-repl-mode . paredit-mode))
+   ("C-c g c" . geiser-connect)))
 
 ;; C-M-f and C-M-b for navigating
 ;; C-M-left Slurp Backward
@@ -61,16 +58,12 @@
   (racket-mode . paredit-mode)
   (eval-expression-minibuffer-setup . paredit-mode))
 
-(use-package company
-  :demand t
-  :bind
-  (("TAB" . company-indent-or-complete-common))
-  :custom
-  (company-idle-delay 0)
-  (company-minimum-prefix-length 1)
-  (company-selection-wrap-around t)
-  :config
-  (company-tng-configure-default))
+(use-package auto-complete
+  :ensure t
+  :init
+  (progn
+    (ac-config-default)
+    (global-auto-complete-mode t)))
 
 (use-package highlight-parentheses
   :ensure t
