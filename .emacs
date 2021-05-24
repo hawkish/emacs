@@ -39,7 +39,9 @@
   :after (paredit)
   :bind
   (("C-c g r" . run-chez)
-   ("C-c g c" . geiser-connect)))
+   ("C-c g c" . geiser-connect))
+  :hook
+  (geiser-repl-mode . paredit-mode))
 
 ;; C-M-f and C-M-b for navigating
 ;; C-M-left Slurp Backward
