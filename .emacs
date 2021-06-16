@@ -34,11 +34,14 @@
   :bind (("C-<up>" . comint-previous-input)
 	 ("C-<down>" . comint-next-input)))
 
-(use-package geiser-chez
+(use-package racket-mode
+  :ensure t)
+
+(use-package geiser-racket
   :ensure t
   :after (paredit)
   :bind
-  (("C-c g r" . run-chez)
+  (("C-c g r" . run-racket)
    ("C-c g c" . geiser-connect))
   :hook
   (geiser-repl-mode . paredit-mode))
