@@ -395,7 +395,7 @@
  ;; If there is more than one, they won't work right.
  '(minimap-window-location 'right)
  '(package-selected-packages
-   '(highlight-symbol rainbow-delimiters multi-term yaml-mode vscode-dark-plus-theme use-package spaceline sly minimap markdown-mode magit highlight-parentheses flyspell-correct-popup flycheck exec-path-from-shell dumb-jump counsel company auto-complete ac-js2))
+   '(highlight-symbol rainbow-delimiters multi-term yaml-mode vscode-dark-plus-theme use-package spaceline sly minimap markdown-mode magit highlight-parentheses flyspell-correct-popup flycheck exec-path-from-shell dumb-jump counsel auto-complete ac-js2))
  '(safe-local-variable-values '((Syntax . Common-Lisp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
