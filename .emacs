@@ -35,16 +35,19 @@
 	 ("C-<down>" . comint-next-input)))
 
 (use-package racket-mode
-  :ensure t)
-
-(use-package geiser
   :ensure t
-  :after (paredit)
-  :bind
-  (("C-c g r" . run-racket)
-   ("C-c g c" . geiser-connect))
-  :hook
-  (geiser-repl-mode . paredit-mode))
+  :after (paredit))
+
+;; (use-package geiser
+;;   :ensure t
+;;   :after (paredit)
+;;   :hook
+;;   (geiser-repl-mode . paredit-mode)
+;;   :config
+;;   (setq geiser-active-implementations '(racket))
+;;   ;; Extra setting for scheme.
+;;   ;;(setq geiser-chez-binary "chez")
+;;   )
 
 ;; C-M-f and C-M-b for navigating
 ;; C-M-left Slurp Backward
@@ -61,6 +64,7 @@
   (lisp-mode . paredit-mode)
   (scheme-mode . paredit-mode)
   (racket-mode . paredit-mode)
+  (racket-repl-mode . paredit-mode)
   (eval-expression-minibuffer-setup . paredit-mode))
 
 (use-package auto-complete
@@ -346,7 +350,7 @@
 ;; C-c C-k to compile the file
 ;; C-j for new line in REPL
 ;; Selecting scheme or racket as default implementation of Scheme.
-(add-hook 'scheme-mode-hook 'geiser-mode)
+;;(add-hook 'scheme-mode-hook 'geiser-mode)
 ;;(setq geiser-active-implementations '(racket))
 ;;(setq geiser-racket-binary "/home/user/racket/bin/racket")
 ;;(setq geiser-active-implementations '(chez))
@@ -396,7 +400,7 @@
  ;; If there is more than one, they won't work right.
  '(minimap-window-location 'right)
  '(package-selected-packages
-   '(highlight-symbol rainbow-delimiters multi-term yaml-mode vscode-dark-plus-theme use-package spaceline sly minimap markdown-mode magit highlight-parentheses flyspell-correct-popup flycheck exec-path-from-shell dumb-jump counsel auto-complete ac-js2))
+   '(ac-geiser highlight-symbol rainbow-delimiters multi-term yaml-mode vscode-dark-plus-theme use-package spaceline sly minimap markdown-mode magit highlight-parentheses flyspell-correct-popup flycheck exec-path-from-shell dumb-jump counsel auto-complete ac-js2))
  '(safe-local-variable-values '((Syntax . Common-Lisp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
