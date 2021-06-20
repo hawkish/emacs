@@ -37,7 +37,7 @@
 (use-package racket-mode
   :ensure t)
 
-(use-package geiser-racket
+(use-package geiser
   :ensure t
   :after (paredit)
   :bind
@@ -347,7 +347,8 @@
 ;; C-j for new line in REPL
 ;; Selecting scheme or racket as default implementation of Scheme.
 (add-hook 'scheme-mode-hook 'geiser-mode)
-(setq geiser-active-implementations '(racket))
+;;(setq geiser-active-implementations '(racket))
+;;(setq geiser-racket-binary "/home/user/racket/bin/racket")
 ;;(setq geiser-active-implementations '(chez))
 ;; Extra setting for scheme.
 ;;(setq geiser-chez-binary "chez")
