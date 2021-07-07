@@ -34,19 +34,11 @@
   :bind (("C-<up>" . comint-previous-input)
 	 ("C-<down>" . comint-next-input)))
 
-;; (use-package racket-mode
-;;   :ensure t
-;;   :after (paredit))
-
 (use-package geiser
   :ensure t
   :after (paredit)
   :hook
   (geiser-repl-mode . paredit-mode)
-  ;;:config
-  ;;(setq geiser-active-implementations '(racket))
-  ;; Extra setting for scheme.
-  ;;(setq geiser-chez-binary "chez")
   )
 
 (use-package geiser-chez
@@ -64,15 +56,6 @@
   :config
   (setq geiser-active-implementations '(racket))
   )
-
-
-(use-package geiser-guile
-  :ensure t
-  :after (paredit)
-  :config
-  (setq geiser-active-implementations '(guile))
-  )
-
 
 ;; C-M-f and C-M-b for navigating
 ;; C-M-left Slurp Backward
