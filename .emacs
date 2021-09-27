@@ -347,7 +347,8 @@
 ;;            (local-set-key "\C-cp" 'slime-close-all-parens-in-sexp)))
 
 ;; Scheme section.
-;; brew install --cask racket
+;; Download Racket from https://www.racket-lang.org/
+;; - the brew version is missing DrRacket.
 ;; Racket shortcuts
 ;; C-c C-k to compile and load file
 ;; C-c C-a to jump to REPL and switch module
