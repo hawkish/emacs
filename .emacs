@@ -388,13 +388,14 @@
 ;; Place a .aff and a .dic in "$HOME/Library/Spelling" for each language.
 ;; https://github.com/wooorm/dictionaries/tree/master/dictionaries
 (setq ispell-program-name "hunspell")
-(setq ispell-local-dictionary "da_DK")
+(setq ispell-dictionary "da_DK")
 (setq ispell-local-dictionary-alist
       '(("da_DK" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))
 ;; Tell relevant modes to use flyspell.
 (require 'flyspell)
 (add-hook 'text-mode-hook 'flyspell-mode)
 (add-hook 'org-mode-hook 'flyspell-mode)
+(add-hook 'markdown-mode-hook 'flyspell-mode) 
 (define-key flyspell-mode-map (kbd "\C-cc") 'flyspell-correct-wrapper)
 
 ;; Tramp
