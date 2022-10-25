@@ -130,9 +130,6 @@
   :config
   (load-theme 'vscode-dark-plus t))
 
-(use-package ivy
-  :ensure t)
-
 (use-package counsel
   :ensure t)
 
@@ -174,8 +171,7 @@
          ("C-x q" . dumb-jump-quick-look)
          ("C-x x" . dumb-jump-go-prefer-external)
          ("C-x z" . dumb-jump-go-prefer-external-other-window)) 
-  :init (dumb-jump-mode)
-  :config (setq dumb-jump-selector 'ivy))
+  :init (dumb-jump-mode))
 
 (use-package minimap
   :ensure t
@@ -192,9 +188,7 @@
 ;; Line spacing
 (setq-default line-spacing 0.3)
 
-;; Ivy mode
-(ivy-mode 1)
-(setq ivy-use-virtual-buffers t)
+;; Global keys
 (global-set-key "\C-s" 'swiper)
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
