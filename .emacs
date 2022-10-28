@@ -57,6 +57,14 @@
   (setq geiser-active-implementations '(racket))
   )
 
+(use-package clojure-mode
+  :ensure t
+  :after (paredit))
+
+(use-package cider
+  :ensure t
+  :after (paredit))
+
 ;; C-M-f and C-M-b for navigating
 ;; C-M-left Slurp Backward
 ;; C-M-Right Barf Backward
