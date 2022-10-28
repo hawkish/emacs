@@ -61,7 +61,7 @@
   :ensure t
   :after (paredit))
 
-(use-package cider-mode
+(use-package cider
   :ensure t
   :after (paredit))
 
