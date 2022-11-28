@@ -34,28 +34,13 @@
   :bind (("C-<up>" . comint-previous-input)
 	 ("C-<down>" . comint-next-input)))
 
-(use-package geiser
+(use-package clojure-mode
   :ensure t
-  :after (paredit)
-  :hook
-  (geiser-repl-mode . paredit-mode)
-  )
+  :after (paredit))
 
-(use-package geiser-chez
+(use-package cider
   :ensure t
-  :after (paredit)
-  :config
-  (setq geiser-active-implementations '(chez))
-  ;; Extra setting for scheme.
-  (setq geiser-chez-binary "chez")
-  )
-
-(use-package geiser-racket
-  :ensure t
-  :after (paredit)
-  :config
-  (setq geiser-active-implementations '(racket))
-  )
+  :after (paredit))
 
 ;; C-M-f and C-M-b for navigating
 ;; C-M-left Slurp Backward
@@ -147,21 +132,6 @@
 
 (use-package multi-term
   :ensure t)
-
-(use-package js2-mode
-  :ensure t
-  :defer t
-  :config
-  (use-package ac-js2
-    :ensure t
-    :defer t
-    :config
-    (add-hook 'js2-mode-hook 'ac-js2-mode)))
-
-(use-package magit
-  :defer t
-  :ensure t
-  :bind ("C-x g" . magit-status))
 
 (use-package dumb-jump
   :ensure t
@@ -309,14 +279,12 @@
   "make some word or string show as pretty Unicode symbols"
   (setq prettify-symbols-alist
         '(
+	  ("fn" . 955)
           ("lambda" . 955) ; λ
           )))
 
 (add-hook 'lisp-mode-hook 'add-pretty-lambda)
-(add-hook 'haskell-mode-hook 'add-pretty-lambda)
-(add-hook 'scheme-mode-hook 'add-pretty-lambda)
-(add-hook 'racket-mode-hook 'add-pretty-lambda)
-(add-hook 'geiser-mode-hook 'add-pretty-lambda)
+(add-hook 'clojure-mode-hook 'add-pretty-lambda)
 (global-prettify-symbols-mode 1)
 
 ;; Lisp section.
@@ -333,7 +301,7 @@
 ;; Set the default lisp you want to use (here it's SBCL).
 ;;(load (expand-file-name "~/.roswell/lisp/quicklisp/slime-helper.el"))
 ;; Replace "sbcl" with the path to your implementation
-(setq inferior-lisp-program "ros -Q run")
+;;(setq inferior-lisp-program "ros -Q run")
 ;;(setq show-paren-delay 0)
 ;;(show-paren-mode 1)
 ;;(add-hook 'lisp-mode-hook
@@ -359,15 +327,6 @@
 ;;(setq geiser-active-implementations '(chez))
 ;; Extra setting for scheme.
 ;;(setq geiser-chez-binary "chez")
-
-;; Prolog
-(autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)
-(autoload 'prolog-mode "prolog" "Major mode for editing Prolog programs." t)
-(autoload 'mercury-mode "prolog" "Major mode for editing Mercury programs." t)
-(setq prolog-system 'swi)
-(setq auto-mode-alist (append '(("\\.pl$" . prolog-mode)
-                                ("\\.m$" . mercury-mode))
-			      auto-mode-alist))
 
 ;; Org mode
 (require 'org)
