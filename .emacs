@@ -1,6 +1,9 @@
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '( "jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/") t)
+(setq package-archive-priorities '(("melpa"    . 5)
+                                   ("jcs-elpa" . 0)))
 (package-initialize)
 
 ;; Bootstrap 'use-package'
@@ -34,13 +37,10 @@
   :bind (("C-<up>" . comint-previous-input)
 	 ("C-<down>" . comint-next-input)))
 
-(use-package clojure-mode
+(use-package codegpt
   :ensure t
-  :after (paredit))
-
-(use-package cider
-  :ensure t
-  :after (paredit))
+  :init
+  (setq openai-key (exec-path-from-shell-copy-env "OPENAI_KEY")))
 
 (use-package clojure-mode
   :ensure t
@@ -155,7 +155,7 @@
   :ensure t
   :bind (("\C-n" . minimap-mode)))
 
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+(setenv "PATH" (concat (getenv "PATH") ":/Usr/local/bin"))
 (setq exec-path (append exec-path '("/usr/local/bin")))
 
 ;; Display line numbers with a small margin.
