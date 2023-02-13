@@ -155,7 +155,7 @@
   :ensure t
   :bind (("\C-n" . minimap-mode)))
 
-(setenv "PATH" (concat (getenv "PATH") ":/Usr/local/bin"))
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setq exec-path (append exec-path '("/usr/local/bin")))
 
 ;; Display line numbers with a small margin.
