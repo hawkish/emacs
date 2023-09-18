@@ -17,11 +17,11 @@
 (setq use-package-always-ensure t)
 
 (use-package auto-package-update
-   :ensure t
-   :config
-   (setq auto-package-update-delete-old-versions t
-         auto-package-update-interval 4)
-   (auto-package-update-maybe))
+  :ensure t
+  :config
+  (setq auto-package-update-delete-old-versions t
+        auto-package-update-interval 4)
+  (auto-package-update-maybe))
 
 (eval-when-compile
   (require 'use-package))
@@ -31,6 +31,9 @@
   :ensure t
   :init
   (exec-path-from-shell-initialize))
+
+(use-package tex
+  :ensure auctex)
 
 (use-package sly
   :ensure t
@@ -371,7 +374,7 @@
  ;; If there is more than one, they won't work right.
  '(minimap-window-location 'right)
  '(package-selected-packages
-   '(ac-geiser highlight-symbol rainbow-delimiters multi-term yaml-mode vscode-dark-plus-theme use-package spaceline sly minimap markdown-mode magit highlight-parentheses flyspell-correct-popup flycheck exec-path-from-shell dumb-jump counsel auto-complete ac-js2))
+   '(auctex ac-geiser highlight-symbol rainbow-delimiters multi-term yaml-mode vscode-dark-plus-theme use-package spaceline sly minimap markdown-mode magit highlight-parentheses flyspell-correct-popup flycheck exec-path-from-shell dumb-jump counsel auto-complete ac-js2))
  '(safe-local-variable-values '((Syntax . Common-Lisp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
