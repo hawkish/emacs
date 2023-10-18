@@ -299,25 +299,29 @@
 (global-prettify-symbols-mode 1)
 
 ;; Lisp section.
+;; https://github.com/roswell/roswell/wiki/Installation
 ;; Remember to:
+;; brew install roswell
+;; ros install sbcl
 ;; ros install slime
+;; ros run
 ;; and evaluate:
 ;; (ql:quickload "quicklisp-slime-helper") 
-;; M-x slime to connect
+;; M-X slime to connect
 ;; C-c C-c to compile defun
 ;; C-c C-k to compile and load file
 ;; C-c C-z to switch to output buffer
 ;; Do some standard SLIME configuration.
 ;;(slime-setup '(slime-fancy slime-tramp))
 ;; Set the default lisp you want to use (here it's SBCL).
-;;(load (expand-file-name "~/.roswell/lisp/quicklisp/slime-helper.el"))
+(load (expand-file-name "~/.roswell/lisp/quicklisp/slime-helper.el"))
 ;; Replace "sbcl" with the path to your implementation
-;;(setq inferior-lisp-program "ros -Q run")
-;;(setq show-paren-delay 0)
-;;(show-paren-mode 1)
-;;(add-hook 'lisp-mode-hook
-;;          (lambda ()
-;;            (local-set-key "\C-cp" 'slime-close-all-parens-in-sexp)))
+(setq inferior-lisp-program "ros -Q run")
+(setq show-paren-delay 0)
+(show-paren-mode 1)
+(add-hook 'list-mode-hook
+	  (lambda ()
+	    (local-set-key "\\C-cp" 'slime-close-all-parens-in-sexp)))
 
 ;; Scheme section.
 ;; Download Racket from https://www.racket-lang.org/
